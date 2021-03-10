@@ -10,7 +10,7 @@ import com.example.shopkeeper.Authentication.MainActivity;
 import com.example.shopkeeper.R;
 
 public class SplashScreen extends AppCompatActivity {
-
+//hii first commit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
