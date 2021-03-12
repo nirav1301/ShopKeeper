@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.shopkeeper.HomeScreen.HomeScreenActivity;
 import com.example.shopkeeper.R;
@@ -15,12 +17,16 @@ import org.jetbrains.annotations.NotNull;
 
 public class Shipping extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
+    private Button btngotoPlaceOrder;
+    private Button addCustomer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shipping);
         getSupportActionBar().hide();
+        addCustomer = findViewById(R.id.btnaddcustomer);
+        btngotoPlaceOrder = findViewById(R.id.btngotoplaceorder);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -43,6 +49,21 @@ public class Shipping extends AppCompatActivity {
                         break;
                 }
                 return false;
+            }
+        });
+        btngotoPlaceOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Shipping.this,PlaceOrder.class);
+                startActivity(intent);
+
+            }
+        });
+        addCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Shipping.this,AddCustomer.class);
+                startActivity(intent);
             }
         });
     }

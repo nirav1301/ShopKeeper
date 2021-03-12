@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.shopkeeper">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShopKeeper">
-        <activity android:name=".Order.OrderHistory"></activity>
+        <activity android:name=".Order.AddCustomer"></activity>
+        <activity android:name=".Order.PlaceOrder" />
+        <activity android:name=".Order.OrderHistory" />
         <activity android:name=".Order.CreateOrder" />
         <activity android:name=".Order.Shipping" />
         <activity android:name=".Order.Scanner" />
@@ -32,5 +32,7 @@
             android:name=".Authentication.MainActivity"
             android:label="Login" />
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

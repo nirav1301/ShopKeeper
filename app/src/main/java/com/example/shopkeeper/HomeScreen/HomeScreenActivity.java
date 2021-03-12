@@ -36,10 +36,7 @@ public class HomeScreenActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.home:
-                                Intent intent = new Intent(HomeScreenActivity.this,
-                                        HomeScreenActivity.class);
-                                startActivity(intent);
-                                break;
+                                return true;
                             case R.id.scan:
                                 Intent intent1 = new Intent(HomeScreenActivity.this,
                                         Scanner.class);

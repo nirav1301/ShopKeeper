@@ -38,10 +38,7 @@ public class OrderHistory extends AppCompatActivity {
                         startActivity(intent1);
                         break;
                     case R.id.order:
-                        Intent intent2 = new Intent(OrderHistory.this
-                                , OrderHistory.class);
-                        startActivity(intent2);
-                        break;
+                       return true;
                 }
                 return false;
             }

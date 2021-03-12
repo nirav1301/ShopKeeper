@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.example.shopkeeper.HomeScreen.HomeScreenActivity;
 import com.example.shopkeeper.R;
@@ -15,12 +17,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class Scanner extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
+    private ImageButton btngotoCreateOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
         getSupportActionBar().hide();
+        btngotoCreateOrder = findViewById(R.id.btngotocreateorder);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -32,10 +36,7 @@ public class Scanner extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.scan:
-                        Intent intent1 = new Intent(Scanner.this,
-                                Scanner.class);
-                        startActivity(intent1);
-                        break;
+                       return true;
                     case R.id.order:
                         Intent intent2 = new Intent(Scanner.this
                                 , OrderHistory.class);
@@ -43,6 +44,13 @@ public class Scanner extends AppCompatActivity {
                         break;
                 }
                 return false;
+            }
+        });
+        btngotoCreateOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Scanner.this,CreateOrder.class);
+                startActivity(intent);
             }
         });
     }
