@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Order.AddCustomer">
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="serif"
+        android:layout_marginRight="110dp"
+        android:layout_marginLeft="110dp"
+        android:gravity="center_horizontal"
+        android:text="Add Customer"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etcustcompanyname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_border"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:layout_below="@+id/textView8"
+        android:hint="Company Name"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        />
+
+    <EditText
+        android:id="@+id/etcustfirstname"
+        android:layout_width="match_parent"
+        android:background="@drawable/edittext_border"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/etcustcompanyname"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="First Name"
+        />
+
+    <EditText
+        android:id="@+id/etcustlastname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/edittext_border"
+        android:layout_below="@+id/etcustfirstname"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Last Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etcustfirstname" />
+
+    <EditText
+        android:id="@+id/etcuststreet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="15dp"
+        android:padding="10dp"
+        android:background="@drawable/edittext_border"
+       android:layout_below="@+id/etcustlastname"
+        android:ems="10"
+        android:hint="Street"
+        android:inputType="textPostalAddress"
+        />
+
+    <EditText
+        android:id="@+id/etcustcity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="15dp"
+        android:padding="10dp"
+        android:layout_below="@+id/etcuststreet"
+        android:background="@drawable/edittext_border"
+        android:ems="10"
+        android:hint="City"
+        android:inputType="textPostalAddress"
+         />
+
+    <EditText
+        android:id="@+id/etcuststate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="15dp"
+        android:padding="10dp"
+        android:background="@drawable/edittext_border"
+       android:layout_below="@+id/etcustcity"
+        android:ems="10"
+        android:hint="State"
+        android:inputType="textPostalAddress"
+        />
+
+    <EditText
+        android:id="@+id/etcustzipcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="15dp"
+        android:padding="10dp"
+        android:background="@drawable/edittext_border"
+       android:layout_below="@id/etcuststate"
+        android:ems="10"
+        android:hint="Zip Code"
+        android:inputType="number"
+        />
+
+    <EditText
+        android:id="@+id/etcustcountry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="15dp"
+        android:padding="10dp"
+        android:background="@drawable/edittext_border"
+        android:layout_below="@id/etcustzipcode"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Country"
+         />
+
+    <EditText
+        android:id="@+id/etcustphone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="15dp"
+        android:padding="10dp"
+        android:background="@drawable/edittext_border"
+        android:layout_below="@+id/etcustcountry"
+        android:ems="10"
+        android:inputType="phone"
+        android:hint="+91"
+        />
+
+    <EditText
+        android:id="@+id/etcustemail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="15dp"
+        android:padding="10dp"
+        android:background="@drawable/edittext_border"
+        android:layout_below="@id/etcustphone"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+         />
+
+    <Button
+        android:id="@+id/btnaddcustdata"
+        android:layout_width="100dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginRight="150dp"
+        android:background="@drawable/rounded_button"
+        android:layout_height="wrap_content"
+       android:gravity="center_horizontal"
+        android:layout_marginTop="55dp"
+        android:layout_below="@+id/etcustemail"
+        android:text="Submit"
+        />
+
+</RelativeLayout>
