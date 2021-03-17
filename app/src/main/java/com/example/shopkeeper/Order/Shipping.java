@@ -2,6 +2,7 @@ package com.example.shopkeeper.Order;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,8 +16,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 public class Shipping extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
+    private RecyclerView recyclerView;
     private Button btngotoPlaceOrder;
     private Button addCustomer;
 
@@ -67,4 +71,8 @@ public class Shipping extends AppCompatActivity {
             }
         });
     }
+
+
+
 }
+
