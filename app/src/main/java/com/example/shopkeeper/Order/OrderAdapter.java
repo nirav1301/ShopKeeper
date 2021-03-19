@@ -1,4 +1,4 @@
-package com.example.shopkeeper.HomeScreen;
+package com.example.shopkeeper.Order;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,28 +7,28 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
+import com.example.shopkeeper.HomeScreen.recadapter;
 import com.example.shopkeeper.R;
 import com.example.shopkeeper.Remote.AndroidVersion;
 
 import java.util.ArrayList;
 
-public class recadapter extends RecyclerView.Adapter<recadapter.viewHolder> {
+public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.viewHolder> {
     private ArrayList<AndroidVersion> android;
 
-    public recadapter(ArrayList<AndroidVersion> android) {
+    public OrderAdapter(ArrayList<AndroidVersion> android) {
         this.android = android;
     }
     @NonNull
     @Override
-    public recadapter.viewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public OrderAdapter.viewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_row, viewGroup, false);
         return new viewHolder(view);
 
     }
     @Override
-    public void onBindViewHolder(@NonNull recadapter.viewHolder holder, int i) {
+    public void onBindViewHolder(@NonNull OrderAdapter.viewHolder holder, int i) {
         holder.tv_name.setText(android.get(i).getName());
         holder.tv_version.setText(android.get(i).getVer());
         holder.tv_api_level.setText(android.get(i).getApi());
@@ -40,7 +40,7 @@ public class recadapter extends RecyclerView.Adapter<recadapter.viewHolder> {
         return android.size();
     }
 
-    public class viewHolder extends ViewHolder{
+    public class viewHolder extends RecyclerView.ViewHolder {
         private TextView tv_name,tv_version,tv_api_level;
         public viewHolder(@NonNull View itemView) {
             super(itemView);
