@@ -1,14 +1,15 @@
 package com.example.shopkeeper.HomeScreen;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shopkeeper.Authentication.MainActivity;
 import com.example.shopkeeper.Order.OrderHistory;
@@ -17,6 +18,7 @@ import com.example.shopkeeper.R;
 import com.example.shopkeeper.Remote.AndroidVersion;
 import com.example.shopkeeper.Remote.ApiInterface;
 import com.example.shopkeeper.Remote.JSONResponse;
+import com.example.shopkeeper.databinding.ActivityHomeScreenBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
 
@@ -32,20 +34,19 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeScreenActivity extends AppCompatActivity {
-    private BottomNavigationView bottomNavigationView;
-    private RecyclerView recyclerView;
+
     private ArrayList<AndroidVersion> data;
     private recadapter adapter;
+    private ActivityHomeScreenBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_screen);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_home_screen);
         getSupportActionBar().hide();
-        //askdjashdka
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
+
         initViews();
-        bottomNavigationView.setOnNavigationItemSelectedListener(
+        binding.bottomNavigation.setOnNavigationItemSelectedListener(
                 new OnNavigationItemSelectedListener() {
 
                     @Override
@@ -59,10 +60,10 @@ public class HomeScreenActivity extends AppCompatActivity {
                                 startActivity(intent1);
                                 break;
                             case R.id.order:
-                               Intent intent2 = new Intent(HomeScreenActivity.this
-                               , OrderHistory.class);
-                               startActivity(intent2);
-                               break;
+                                Intent intent2 = new Intent(HomeScreenActivity.this
+                                        , OrderHistory.class);
+                                startActivity(intent2);
+                                break;
                         }
                         return false;
                     }
@@ -72,10 +73,10 @@ public class HomeScreenActivity extends AppCompatActivity {
     }
 
     public void initViews() {
-        recyclerView = (RecyclerView)findViewById(R.id.orderrecycler);
-        recyclerView.setHasFixedSize(true);
+
+        binding.orderrecycler.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
+        binding.orderrecycler.setLayoutManager(layoutManager);
         loadJSON();
     }
 
@@ -92,7 +93,7 @@ public class HomeScreenActivity extends AppCompatActivity {
                 JSONResponse jsonResponse = response.body();
                 data = new ArrayList<>(Arrays.asList(jsonResponse.getAndroid()));
                 adapter = new recadapter(data);
-                recyclerView.setAdapter(adapter);
+                binding.orderrecycler.setAdapter(adapter);
             }
 
             @Override
@@ -103,7 +104,7 @@ public class HomeScreenActivity extends AppCompatActivity {
     }
 
 
-    public void logout(View view){
+    public void logout(View view) {
         Intent intent = new Intent(HomeScreenActivity.this, MainActivity.class);
         startActivity(intent);
         finish();

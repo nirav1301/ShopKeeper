@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.shopkeeper"
-        minSdkVersion 16
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -26,6 +26,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    dataBinding
+            {
+                enabled true
+            }
 }
 
 dependencies {
@@ -44,11 +49,15 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))
     implementation 'com.squareup.picasso:picasso:2.4.0'
-    implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
+    implementation 'com.hb.codescanner:codescanner:1.1'
     implementation 'com.wang.avi:library:2.1.3'
     // define any required OkHttp artifacts without version
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
-    implementation 'com.google.android.gms:play-services-ads:20.0.0'
+
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    implementation 'br.com.simplepass:loading-button-android:2.2.0'
 
 }
