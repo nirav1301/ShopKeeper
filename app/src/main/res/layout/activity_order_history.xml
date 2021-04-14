@@ -20,8 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="128dp"
-        android:layout_marginRight="128dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginRight="140dp"
         android:fontFamily="serif"
         android:gravity="center_horizontal"
         android:text="Order History"
@@ -32,11 +32,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <SearchView
-        android:id="@+id/searchView"
+        android:id="@+id/orderhistorysearchview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/edittext_border"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,11 +45,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/orderhistoryrecview"
         android:layout_width="409dp"
-        android:layout_height="650dp"
+        android:layout_height="590dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orderhistorysearchview" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

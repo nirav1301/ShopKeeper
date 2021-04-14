@@ -3,6 +3,8 @@ package com.example.shopkeeper.Order;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,12 +15,15 @@ import com.example.shopkeeper.R;
 import com.example.shopkeeper.Remote.AndroidVersion;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.viewHolder> {
+public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.viewHolder> implements Filterable {
     private ArrayList<AndroidVersion> android;
+    private ArrayList<AndroidVersion> androidList;
 
     public OrderAdapter(ArrayList<AndroidVersion> android) {
         this.android = android;
+        androidList = new ArrayList<>(androidList);
     }
     @NonNull
     @Override
@@ -39,6 +44,36 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.viewHolder> 
     public int getItemCount() {
         return android.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return androidFilter;
+    }
+    private Filter androidFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<AndroidVersion> filteredList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(androidList);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (AndroidVersion item : androidList) {
+                    if (item.getName().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            android.clear();
+            android.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public class viewHolder extends RecyclerView.ViewHolder {
         private TextView tv_name,tv_version,tv_api_level;

@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShopKeeper">
-        <activity android:name=".Order.AddCustomer"></activity>
+        <activity android:name=".Scanner_Activity"></activity>
+        <activity android:name=".Order.Order_Details_Activity" />
+        <activity android:name=".Home" />
+        <activity android:name=".Order.AddCustomer" />
         <activity android:name=".Order.PlaceOrder" />
         <activity android:name=".Order.OrderHistory" />
         <activity android:name=".Order.CreateOrder" />
@@ -30,9 +33,11 @@
         </activity>
         <activity
             android:name=".Authentication.MainActivity"
-            android:label="Login" />
+            android:label="Login"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
 </manifest>

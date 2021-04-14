@@ -12,11 +12,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shopkeeper.Home;
 import com.example.shopkeeper.HomeScreen.HomeScreenActivity;
 import com.example.shopkeeper.R;
 import com.example.shopkeeper.Remote.APIClient;
 import com.example.shopkeeper.Remote.LoginRequest;
 import com.example.shopkeeper.Remote.LoginResponse;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,15 +29,18 @@ public class MainActivity extends AppCompatActivity {
     private EditText logPassword;
     private Button btnLogin;
     private TextView txtForgot;
+    private AVLoadingIndicatorView AVI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         logEmail = findViewById(R.id.logemail);
+        AVI = findViewById(R.id.avi);
         logPassword = findViewById(R.id.logpswd);
         btnLogin = findViewById(R.id.btnlogin);
         txtForgot = findViewById(R.id.txtforgot);
+        stopAnim();
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
                        return;
                    }
                    else{
+                       startAnim();
                        userLogin();
+
                    }
 
 
@@ -93,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                          @Override
                          public void run() {
                              Intent intent = new Intent(MainActivity.this,
-                                     HomeScreenActivity.class);
+                                     Home.class);
                              startActivity(intent);
                              finish();
 
@@ -111,4 +118,13 @@ public class MainActivity extends AppCompatActivity {
          });
 
     }
-}
+    void startAnim(){
+        AVI.show();
+        // or avi.smoothToShow();
+    }
+    void stopAnim() {
+        AVI.hide();
+        // or avi.smoothToHide();
+
+    }
+    }
