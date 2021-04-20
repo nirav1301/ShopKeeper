@@ -40,8 +40,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Home_fragment extends Fragment {
     private List<Movie> movieList = new ArrayList<>();
+    private List<RecentOrder> recentOrders = new ArrayList<>();
     private RecyclerView recyclerView;
-    private MovieAdapter mAdapter;
+   // private MovieAdapter mAdapter;
+    private RecentOrderAdapter mAdapter;
     private TextView viewOrders;
     private ImageButton imageButtonLogout;
 
@@ -80,13 +82,14 @@ public class Home_fragment extends Fragment {
 
         });
 
-        mAdapter = new MovieAdapter(movieList);
+        mAdapter = new RecentOrderAdapter(recentOrders);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
+        AddRecentOrder();
 
-        prepareMovieData();
+       // prepareMovieData();
         return view;
 
     }
@@ -141,6 +144,30 @@ public class Home_fragment extends Fragment {
         movieList.add(movie);
 
         mAdapter.notifyDataSetChanged();
+
+    }
+    private void AddRecentOrder(){
+        RecentOrder recentOrder = new RecentOrder("ST39487","In Progress","HiddenBrains Info Tech Pvt Ltd.",
+                "09 sep 2020 | 11:04 AM","1245,5321,1245","$1220");
+        recentOrders.add(recentOrder);
+        recentOrder = new RecentOrder("ST39488","In Progress","Kaizen Infocomm Pvt. Ltd.",
+                "10 sep 2020 | 05:04 PM","1247,5325,1248","$1300");
+        recentOrders.add(recentOrder);
+        recentOrder = new RecentOrder("ST39489","In Progress","Seven seas infotech Pvt. Ltd",
+                "11 sep 2020 | 08:10 PM","1248,5323,1246","$1450");
+        recentOrders.add(recentOrder);
+        recentOrder = new RecentOrder("ST39490","In Progress","Sophos Securities",
+                "12 sep 2020 | 12:16 PM","1249,5329,1249","$1500");
+        recentOrders.add(recentOrder);
+        recentOrder = new RecentOrder("ST39488","In Progress","Kaizen Infocomm Pvt. Ltd.",
+                "10 sep 2020 | 05:04 PM","1247,5325,1248","$1300");
+        recentOrders.add(recentOrder);
+        recentOrder = new RecentOrder("ST39489","In Progress","Seven seas infotech Pvt. Ltd",
+                "11 sep 2020 | 08:10 PM","1248,5323,1246","$1450");
+        recentOrders.add(recentOrder);
+        recentOrder = new RecentOrder("ST39490","In Progress","Sophos Securities",
+                "12 sep 2020 | 12:16 PM","1249,5329,1249","$1500");
+        recentOrders.add(recentOrder);
 
     }
 

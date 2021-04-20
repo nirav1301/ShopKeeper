@@ -19,7 +19,6 @@ public class PlaceOrder extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_order);
-        getSupportActionBar().hide();
         btnPlaceOrder = findViewById(R.id.btnplaceorder);
         btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override

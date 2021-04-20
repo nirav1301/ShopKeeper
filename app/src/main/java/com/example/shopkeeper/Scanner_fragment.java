@@ -45,11 +45,17 @@ public class Scanner_fragment extends Fragment {
                 startActivityForResult(intentX, 789);
             }
         });
+        binding.imgbtnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        Glide.with(this).load("https://images.unsplash.com/photo-1617468505637-1230fb86d2cf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80")
-                .placeholder(R.drawable.ic_continue)
-                .error(R.drawable.ic_continue)
-                .into(binding.imageProfile);
+            }
+        });
+
+//        Glide.with(this).load("https://images.unsplash.com/photo-1617468505637-1230fb86d2cf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80")
+//                .placeholder(R.drawable.ic_continue)
+//                .error(R.drawable.ic_continue)
+//                .into(binding.imageProfile);
 
 
         return binding.getRoot();

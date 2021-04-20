@@ -28,7 +28,6 @@ public class AddCustomer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_customer);
-        getSupportActionBar().hide();
         etCustCompany = findViewById(R.id.etcustcompanyname);
         etCustFirstName = findViewById(R.id.etcustfirstname);
         etCustLastName = findViewById(R.id.etcustlastname);
