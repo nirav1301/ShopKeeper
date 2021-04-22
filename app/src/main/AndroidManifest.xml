@@ -9,16 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShopKeeper">
-        <activity android:name=".Order.Order_Details_Activity" />
-        <activity android:name=".Home" />
-        <activity android:name=".Order.AddCustomer" />
-        <activity android:name=".Order.PlaceOrder" />
+        <activity android:name=".Order.Order_Details_Activity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".Home"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".Order.AddCustomer"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".Order.PlaceOrder"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Order.OrderHistory" />
-        <activity android:name=".Order.CreateOrder" />
-        <activity android:name=".Order.Shipping" />
+        <activity android:name=".Order.CreateOrder"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".Order.Shipping"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Order.Scanner" />
         <activity
             android:name=".HomeScreen.HomeScreenActivity"
+            android:windowSoftInputMode="adjustResize"
             android:label="Home Page" />
         <activity
             android:name=".Authentication.ForgotPasswordActivity"
