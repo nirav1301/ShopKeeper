@@ -11,9 +11,6 @@
         android:id="@+id/spltext"
         android:layout_width="240dp"
         android:layout_height="230dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginLeft="84dp"
-        android:layout_marginTop="268dp"
         android:background="@color/white"
         android:fontFamily="serif"
         android:gravity="center_horizontal"
@@ -22,8 +19,12 @@
         android:textColor="#777575"
         android:textSize="40sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.455" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

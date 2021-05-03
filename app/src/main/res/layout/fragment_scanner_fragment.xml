@@ -12,12 +12,23 @@
             android:id="@+id/imageButton2"
             android:layout_width="170dp"
             android:layout_height="160dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="36dp"
             android:background="@drawable/sc04_img_scan"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilory_extra_bold"
+            android:text="Tap the icon to add product"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageButton2" />
 
         <ImageButton
             android:id="@+id/imgbtnClose"
@@ -34,7 +45,7 @@
             android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/gilory_bold"
             android:text="Close"
@@ -59,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="4dp"
             android:fontFamily="@font/gilory_bold"
             android:text="Continue"
             android:textSize="18sp"
@@ -126,9 +137,11 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="550dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="52dp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:listitem="@layout/add_product"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

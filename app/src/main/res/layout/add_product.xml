@@ -31,10 +31,11 @@
             android:id="@+id/imageButton4"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="316dp"
             android:layout_marginTop="60dp"
             android:background="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtquantity"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/minus" />
 
@@ -148,6 +149,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/txtproductcolor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="144dp"
@@ -158,31 +160,34 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/coproductcolor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="200dp"
             android:layout_marginTop="164dp"
             android:text="Maroon"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toEndOf="@id/txtproductcolor"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/txttotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="164dp"
-            android:layout_marginEnd="68dp"
             android:text="Total:"
+            android:layout_marginEnd="5dp"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/coproductprice"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/coproductprice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="164dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="20dp"
             android:text="192"
             android:textColor="#156CB1"
             android:textSize="18sp"
@@ -191,14 +196,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/txtquantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:layout_marginEnd="44dp"
             android:text="2"
+            android:layout_marginEnd="8dp"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageButton5"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

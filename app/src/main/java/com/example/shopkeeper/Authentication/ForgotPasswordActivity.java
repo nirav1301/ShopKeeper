@@ -21,7 +21,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
         etForgot = findViewById(R.id.etforgotemail);
         btnForgot = findViewById(R.id.btnforget);
-        getSupportActionBar().hide();
         btnForgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
