@@ -1,4 +1,4 @@
-package com.example.shopkeeper.Authentication;
+package com.example.shopkeeper.authentication;
 
 import androidx.appcompat.app.AppCompatActivity;
 

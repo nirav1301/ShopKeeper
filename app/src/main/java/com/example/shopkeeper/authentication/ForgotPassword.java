@@ -1,4 +1,4 @@
-package com.example.shopkeeper.Authentication;
+package com.example.shopkeeper.authentication;
 
 public class ForgotPassword {
     private String emailId;

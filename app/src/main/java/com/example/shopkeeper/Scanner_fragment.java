@@ -9,19 +9,34 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.dc.codescanner.CodeScannerActivity;
 import com.dc.codescanner.CodeScannerConfig;
 import com.dc.codescanner.controls.ScannerResult;
-import com.example.shopkeeper.Order.Shipping;
+import com.example.shopkeeper.authentication.Login.RetrofitGenerator;
+import com.example.shopkeeper.createorder.CreateOrderResponse;
+import com.example.shopkeeper.createorder.Request.CreateOrderRequestBody;
+import com.example.shopkeeper.createorder.Request.CreateOrderRequestEnvelope;
+import com.example.shopkeeper.createorder.Response.CreateOrderResponseEnvelope;
+import com.example.shopkeeper.createorder.XAddProductAdapter;
 import com.example.shopkeeper.databinding.FragmentScannerFragmentBinding;
+import com.example.shopkeeper.findcustomer.Shipping;
+import com.google.gson.Gson;
 
-import java.io.File;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class Scanner_fragment extends Fragment {
     private FragmentScannerFragmentBinding binding;
+    private String myResult;
+    private String pCode;
+    private String cCode;
+    private XAddProductAdapter mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,6 +67,7 @@ public class Scanner_fragment extends Fragment {
             }
         });
 
+
 //        Glide.with(this).load("https://images.unsplash.com/photo-1617468505637-1230fb86d2cf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80")
 //                .placeholder(R.drawable.ic_continue)
 //                .error(R.drawable.ic_continue)
@@ -67,15 +83,56 @@ public class Scanner_fragment extends Fragment {
         if (requestCode == 789) {
             if (resultCode == Activity.RESULT_OK) {
                 ScannerResult scannerResult = data.getParcelableExtra((CodeScannerActivity.Companion.getRESULT_KEY()));
-                /*Toast.makeText(requireContext(),scannerResult.getResult(),Toast.LENGTH_LONG).show();*/
-                addProductToList(scannerResult.getResult());
+                myResult = scannerResult.getResult();
+                pCode = myResult.substring(0,6);
+                cCode = myResult.substring(7);
+                addProductToList();
+
             }
         }
     }
 
-    private void addProductToList(String qrResult) {
-        //Api Call
-        //Product
-        //Product add into recyclerview
+    private void addProductToList() {
+        CreateOrderRequestEnvelope requestEnvelope = new  CreateOrderRequestEnvelope();
+        CreateOrderRequestBody requestBody = new CreateOrderRequestBody();
+        CreateOrderRequestBody.RequestCreateOrder requestModel = new CreateOrderRequestBody.RequestCreateOrder();
+        requestModel.companyId = "10004";
+        requestModel.productId = pCode;
+        requestModel.colorId = cCode;
+        requestModel.userId ="740";
+        requestModel.xmlns = "http://tempuri.org/";
+        requestBody.requestCreateOrder = requestModel;
+        requestEnvelope.body = requestBody;
+        Call<CreateOrderResponseEnvelope> call =
+                RetrofitGenerator.getApiService().createOrderX(requestEnvelope);
+        call.enqueue(new Callback<CreateOrderResponseEnvelope>() {
+            @Override
+            public void onResponse(Call<CreateOrderResponseEnvelope> call, Response<CreateOrderResponseEnvelope> response) {
+                Gson gson = new Gson();
+                CreateOrderResponse createOrderResponse = gson.fromJson(response.body().body.
+                        createOrderResponseModel.GetProductDetailByProductCodeResult,CreateOrderResponse.class);
+                if(createOrderResponse.getSetting().getSuccess()==true){
+                    mAdapter = new XAddProductAdapter();
+                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+                    binding.recviewAddProduct.setLayoutManager(mLayoutManager);
+                    binding.recviewAddProduct.setItemAnimator(new DefaultItemAnimator());
+                    binding.recviewAddProduct.setAdapter(mAdapter);
+
+                    mAdapter.clear(false);
+                    mAdapter.addAll(createOrderResponse.getData(), false);
+                    mAdapter.notifyDataSetChanged();
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<CreateOrderResponseEnvelope> call, Throwable t) {
+
+            }
+        });
+
+
     }
 }

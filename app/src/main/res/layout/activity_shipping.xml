@@ -5,7 +5,7 @@
     android:background="#F8FBFB"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Order.Shipping">
+    tools:context=".findcustomer.Shipping">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -46,18 +46,24 @@
              android:gravity="center_horizontal"
              android:layout_marginTop="15dp"
              />
+         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+             android:layout_width="match_parent"
+             android:layout_height="490dp"
+             android:id="@+id/swipeforrefshipping"
+             android:layout_below="@+id/menu_search"
+             android:layout_marginTop="10dp">
          <androidx.recyclerview.widget.RecyclerView
              android:layout_width="match_parent"
+             android:layout_height="490dp"
              android:id="@+id/recycler_view"
-             android:layout_below="@+id/menu_search"
-             android:layout_marginTop="10dp"
-             android:layout_height="490dp"/>
+            />
+         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
          <androidx.appcompat.widget.AppCompatButton
              android:id="@+id/btngotoplaceorder"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:layout_below="@+id/recycler_view"
+             android:layout_below="@+id/swipeforrefshipping"
              android:layout_marginTop="25dp"
              android:layout_marginLeft="40dp"
              android:layout_marginRight="40dp"

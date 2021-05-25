@@ -11,7 +11,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.shopkeeper.Authentication.MainActivity;
+import com.example.shopkeeper.authentication.MainActivity;
 import com.example.shopkeeper.Order.OrderHistory;
 import com.example.shopkeeper.Order.Scanner;
 import com.example.shopkeeper.R;
@@ -19,7 +19,6 @@ import com.example.shopkeeper.Remote.AndroidVersion;
 import com.example.shopkeeper.Remote.ApiInterface;
 import com.example.shopkeeper.Remote.JSONResponse;
 import com.example.shopkeeper.databinding.ActivityHomeScreenBinding;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
 
 import org.jetbrains.annotations.NotNull;

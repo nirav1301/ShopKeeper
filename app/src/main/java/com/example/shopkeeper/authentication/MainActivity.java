@@ -1,8 +1,7 @@
-package com.example.shopkeeper.Authentication;
+package com.example.shopkeeper.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -11,11 +10,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.shopkeeper.authentication.Login.Request.LoginRequestBody;
+import com.example.shopkeeper.authentication.Login.Request.LoginRequestEnvelope;
+import com.example.shopkeeper.authentication.Login.Response.LoginResponseEnvelope;
+import com.example.shopkeeper.authentication.Login.Response.UserLoginResponse;
+import com.example.shopkeeper.authentication.Login.RetrofitGenerator;
 import com.example.shopkeeper.Home;
 import com.example.shopkeeper.R;
-import com.example.shopkeeper.Remote.APIClient;
-import com.example.shopkeeper.Remote.LoginRequest;
-import com.example.shopkeeper.Remote.LoginResponse;
+import com.google.gson.Gson;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton;
@@ -77,38 +79,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void userLogin() {
-        LoginRequest loginRequest = new LoginRequest();
-        loginRequest.setEmail(logEmail.getText().toString());
-        loginRequest.setPassword(logPassword.getText().toString());
-        Call<LoginResponse> loginResponseCall = APIClient.getService().loginUser(loginRequest);
-        loginResponseCall.enqueue(new Callback<LoginResponse>() {
+
+        LoginRequestEnvelope requestEnvelope = new LoginRequestEnvelope();
+        LoginRequestBody requestBody = new LoginRequestBody();
+        LoginRequestBody.RequestUserLogin requestModel = new LoginRequestBody.RequestUserLogin();
+        requestModel.loginId = logEmail.getText().toString();
+        requestModel.password = logPassword.getText().toString();
+        requestModel.xmlns = "http://tempuri.org/";
+        requestBody.requestUserLogin = requestModel;
+        requestEnvelope.body = requestBody;
+        Call<LoginResponseEnvelope> call =
+                RetrofitGenerator.getApiService().validateUserX(requestEnvelope);
+        call.enqueue(new Callback<LoginResponseEnvelope>() {
             @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                stopAnim();
-                if (response.isSuccessful()) {
-                    Toast.makeText(MainActivity.this,
-                            "Login Successful", Toast.LENGTH_LONG).show();
-                    LoginResponse loginResponse = response.body();
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Intent intent = new Intent(MainActivity.this,
-                                    Home.class);
-                            startActivity(intent);
-                            finish();
-
-                        }
-                    }, 700);
-
+            public void onResponse(Call<LoginResponseEnvelope> call, Response<LoginResponseEnvelope> response) {
+                Gson gson = new Gson();
+                UserLoginResponse userLoginResponse = gson.fromJson(response.body().body.loginResponseModel.ValidateUserResult, UserLoginResponse.class);
+                if (userLoginResponse.getSetting().getSuccess() == true) {
+                     stopAnim();
+//                    Toast.makeText(MainActivity.this,userLoginResponse.getData().get(0).getCompanyEmail(),Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(MainActivity.this, Home.class);
+                    startActivity(i);
+                    Toast.makeText(MainActivity.this, "Welcome" + " " + userLoginResponse.getData().get(0).getFirstName(),
+                            Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
 
             @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Network Failed", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<LoginResponseEnvelope> call, Throwable t) {
 
             }
         });
+
+
 
     }
 

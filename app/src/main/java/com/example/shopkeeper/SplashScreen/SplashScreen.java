@@ -1,16 +1,15 @@
 package com.example.shopkeeper.SplashScreen;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.shopkeeper.Authentication.MainActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.shopkeeper.authentication.MainActivity;
 import com.example.shopkeeper.R;
 
 public class SplashScreen extends AppCompatActivity {
-//hii first commit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

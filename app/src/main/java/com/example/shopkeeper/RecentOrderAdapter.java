@@ -8,12 +8,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.shopkeeper.recentorder.response.RecentOrderModel;
+
 import java.util.List;
 
 public class RecentOrderAdapter extends RecyclerView.Adapter<RecentOrderAdapter.MyViewHolder> {
-    private List<RecentOrder> recentOrders;
+    private List<RecentOrderModel> recentOrders;
 
-    public RecentOrderAdapter(List<RecentOrder> recentOrders) {
+    public RecentOrderAdapter(List<RecentOrderModel> recentOrders) {
         this.recentOrders = recentOrders;
     }
 
@@ -28,13 +30,13 @@ public class RecentOrderAdapter extends RecyclerView.Adapter<RecentOrderAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull RecentOrderAdapter.MyViewHolder holder, int position) {
-        RecentOrder recentOrder= recentOrders.get(position);
-        holder.ordernumber.setText(recentOrder.getOrdernumber());
-        holder.orderstatus.setText(recentOrder.getStatus());
-        holder.companyname.setText(recentOrder.getCompanyname());
-        holder.ordertime.setText(recentOrder.getOrderdate());
-        holder.orderinvoice.setText(recentOrder.getOrderinvoicenumber());
-        holder.orderamount.setText(recentOrder.getOrderamount());
+        RecentOrderModel recentOrder= recentOrders.get(position);
+        holder.ordernumber.setText(String.valueOf(recentOrder.getInventoryOrderID()));
+        holder.orderstatus.setText(recentOrder.getOrderStatus());
+        holder.companyname.setText(recentOrder.getCompanyName());
+        holder.ordertime.setText(recentOrder.getDateTimeOrder());
+        holder.orderinvoice.setText(String.valueOf(recentOrder.getInvoiceNo()));
+        holder.orderamount.setText(String.valueOf(recentOrder.getTotalOrderAmount()));
 
     }
 

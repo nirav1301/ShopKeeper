@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+<androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="15dp"
@@ -17,25 +18,27 @@
         android:paddingBottom="10dp">
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/imgbtndelete"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_marginTop="16dp"
+            android:padding="10dp"
             android:layout_marginEnd="16dp"
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_delete" />
+            app:srcCompat="@drawable/ic_delete"
+            android:contentDescription="TODO" />
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/imgBtnMinusQuantity"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="316dp"
             android:layout_marginTop="60dp"
             android:background="@color/white"
-            app:layout_constraintEnd_toStartOf="@+id/txtquantity"
+            app:layout_constraintEnd_toStartOf="@+id/productQuantity"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/minus" />
 
@@ -44,42 +47,46 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="60dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
+            android:padding="10dp"
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/plus" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imgViewProductImg"
             android:layout_width="110dp"
             android:layout_height="140dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:padding="10dp"
             android:background="@drawable/sc03_grey_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@drawable/tshirt" />
 
         <TextView
+            android:id="@+id/productUnitPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="164dp"
             android:fontFamily="@font/gilory_extra_bold"
             android:text="55.99"
             android:textColor="#156CB1"
             android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtproductcolor"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/imgViewProductImg"
+             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="144dp"
             android:layout_marginTop="16dp"
+            android:id="@+id/productStyleNumber"
             android:fontFamily="@font/gilory_extra_bold"
-            android:text="1232"
             android:textColor="@color/black"
             android:textSize="22sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="228dp"
             android:layout_marginTop="48dp"
-            android:text="Tshirt"
+            android:id="@+id/productCategoryName"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +128,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="236dp"
             android:layout_marginTop="76dp"
-            android:text="2/2/2"
+            android:id="@+id/productSizeRatio"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -142,7 +149,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="272dp"
             android:layout_marginTop="104dp"
-            android:text="20/04/2021"
+            android:id="@+id/productExpectedDate"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -160,11 +167,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/coproductcolor"
+            android:id="@+id/productColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="164dp"
-            android:text="Maroon"
+            android:text="Green"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginStart="5dp"
@@ -177,35 +184,36 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="164dp"
             android:text="Total:"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="15dp"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@id/coproductprice"
+            app:layout_constraintStart_toEndOf="@id/productColor"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/coproductprice"
+            android:id="@+id/productTotalPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="164dp"
-            android:layout_marginEnd="20dp"
-            android:text="192"
             android:textColor="#156CB1"
+            android:text="500"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toEndOf="@id/txttotal"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txtquantity"
+            android:id="@+id/productQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="2"
+            android:text="5"
             android:layout_marginEnd="8dp"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/imageButton5"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
+</layout>
