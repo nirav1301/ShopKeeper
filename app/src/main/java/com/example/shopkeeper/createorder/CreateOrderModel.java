@@ -3,32 +3,41 @@ package com.example.shopkeeper.createorder;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 
-public class CreateOrderModel {
+public class CreateOrderModel implements Serializable {
 
     @SerializedName("ProductID")
     @Expose
     private int productID;
+
     @SerializedName("CompanyID")
     @Expose
     private int companyID;
+
     @SerializedName("StyleNo")
     @Expose
     private String styleNo;
+
     @SerializedName("ProductName")
     @Expose
     private String productName;
+
     @SerializedName("UnitPrice")
     @Expose
     private int unitPrice;
+
     @SerializedName("ColorName")
     @Expose
     private String colorName;
+
     @SerializedName("ColorIDs")
     @Expose
     private String colorIDs;
+
+
     @SerializedName("Color")
     @Expose
     private String color;
@@ -52,6 +61,7 @@ public class CreateOrderModel {
     @SerializedName("ProductDescription")
     @Expose
     private String productDescription;
+
     @SerializedName("productColorImageAPIs")
     @Expose
     private List<ProductColorImageAPI> productColorImageAPIs = null;

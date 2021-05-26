@@ -1,5 +1,7 @@
 package com.example.shopkeeper.createorder;
 
+import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 
 import com.example.shopkeeper.R;
@@ -20,6 +22,17 @@ public class XAddProductAdapter extends EasyAdapter<CreateOrderModel, AddProduct
         addProductBinding.productSizeRatio.setText(String.valueOf(createOrderModel.getSizeRatio()));
 //        addProductBinding.productExpectedDate.setText(String.valueOf(createOrderModel.getExpectedDate()));
         addProductBinding.productColor.setText(String.valueOf(createOrderModel.getColor()));
+
+        String qualityString = addProductBinding.productQuantity.getText().toString();
+        if (!TextUtils.isEmpty(qualityString)) {
+            int quantity = Integer.parseInt(qualityString);
+            int totalPrice = quantity * createOrderModel.getUnitPrice();
+            addProductBinding.productTotalPrice.setText(String.valueOf(totalPrice));
+        } else {
+            int quantity =5;
+            int totalPrice = quantity * createOrderModel.getUnitPrice();
+            addProductBinding.productTotalPrice.setText(String.valueOf(totalPrice));
+        }
 
     }
 }

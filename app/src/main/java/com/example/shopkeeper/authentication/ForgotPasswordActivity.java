@@ -1,13 +1,13 @@
 package com.example.shopkeeper.authentication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.shopkeeper.R;
 
@@ -19,23 +19,25 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
+
+        /*CreateOrderModel createOrderModel= (CreateOrderModel) getIntent().getSerializableExtra("abcd");*/
+
+
         etForgot = findViewById(R.id.etforgotemail);
         btnForgot = findViewById(R.id.btnforget);
         btnForgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = etForgot.getText().toString().trim();
-                if(email.isEmpty()){
+                if (email.isEmpty()) {
                     etForgot.requestFocus();
                     etForgot.setError("email cannot be empty");
                     return;
-                }
-               else if(! Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     etForgot.requestFocus();
                     etForgot.setError("email is not valid");
                     return;
-                }
-               else{
+                } else {
                     sendResetLink();
                 }
 

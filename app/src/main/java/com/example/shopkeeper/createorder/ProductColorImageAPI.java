@@ -2,7 +2,9 @@ package com.example.shopkeeper.createorder;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ProductColorImageAPI {
+import java.io.Serializable;
+
+public class ProductColorImageAPI implements Serializable {
 
     @SerializedName("ColorSmallImageUrl")
     @Expose

@@ -49,7 +49,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))
     implementation 'com.squareup.picasso:picasso:2.4.0'
-    implementation 'com.hb.codescanner:codescanner:1.1'
+    implementation 'com.github.hbdevmdm:CodeScanner:1.1'
     implementation 'com.wang.avi:library:2.1.3'
     // define any required OkHttp artifacts without version
     implementation("com.squareup.okhttp3:okhttp")

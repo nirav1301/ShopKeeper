@@ -43,7 +43,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                 break;
 
             case R.id.scan:
-                fragment = new Scanner_fragment();
+                fragment = new ScannerFragment();
                 break;
 
             case R.id.order:
