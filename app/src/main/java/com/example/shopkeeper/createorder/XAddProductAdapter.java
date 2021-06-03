@@ -22,7 +22,6 @@ public class XAddProductAdapter extends EasyAdapter<CreateOrderModel, AddProduct
         addProductBinding.productSizeRatio.setText(String.valueOf(createOrderModel.getSizeRatio()));
 //        addProductBinding.productExpectedDate.setText(String.valueOf(createOrderModel.getExpectedDate()));
         addProductBinding.productColor.setText(String.valueOf(createOrderModel.getColor()));
-
         String qualityString = addProductBinding.productQuantity.getText().toString();
         if (!TextUtils.isEmpty(qualityString)) {
             int quantity = Integer.parseInt(qualityString);
@@ -35,4 +34,5 @@ public class XAddProductAdapter extends EasyAdapter<CreateOrderModel, AddProduct
         }
 
     }
+
 }

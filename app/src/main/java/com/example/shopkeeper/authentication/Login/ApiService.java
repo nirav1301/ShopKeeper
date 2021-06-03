@@ -10,6 +10,10 @@ import com.example.shopkeeper.orderhistory.Request.OrderHistoryRequestEnvelope;
 import com.example.shopkeeper.orderhistory.Response.OrderHistoryResponseEnvelope;
 import com.example.shopkeeper.recentorder.request.RecentOrderRequestEnvelope;
 import com.example.shopkeeper.recentorder.response.RecentOrderResponseEnvelope;
+import com.example.shopkeeper.sendinvoice.request.SendInvoiceRequestEnvelope;
+import com.example.shopkeeper.sendinvoice.response.SendInvoiceResponseEnvelope;
+import com.example.shopkeeper.sendorder.request.SendOrderRequestEnvelope;
+import com.example.shopkeeper.sendorder.response.SendOrderResponseEnvelope;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -57,6 +61,21 @@ public interface ApiService {
     )
     @POST("myservice.asmx")
     Call<FindCustomerResponseEnvelope> findCutomerX(@Body FindCustomerRequestEnvelope findCustomerRequestEnvelope);
+
+    @Headers({
+            "Content-Type: text/xml;charset=UTF-8",
+            "SOAPAction: http://tempuri.org/EmailPlaceOrder"}
+    )
+    @POST("myservice.asmx")
+    Call<SendInvoiceResponseEnvelope> sendinvoiceX(@Body SendInvoiceRequestEnvelope sendInvoiceRequestEnvelope);
+
+    @Headers({
+            "Content-Type: text/xml;charset=UTF-8",
+            "SOAPAction: http://tempuri.org/SendOrder"}
+    )
+    @POST("myservice.asmx")
+    Call<SendOrderResponseEnvelope> sendorderX(@Body SendOrderRequestEnvelope sendOrderRequestEnvelope);
+
 
 }
 

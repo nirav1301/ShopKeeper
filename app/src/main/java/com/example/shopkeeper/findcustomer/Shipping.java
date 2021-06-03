@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -13,10 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.shopkeeper.authentication.Login.RetrofitGenerator;
 import com.example.shopkeeper.Order.AddCustomer;
-import com.example.shopkeeper.Order.PlaceOrder;
+import com.example.shopkeeper.sendorder.PlaceOrder;
 import com.example.shopkeeper.R;
+import com.example.shopkeeper.authentication.Login.RetrofitGenerator;
 import com.example.shopkeeper.findcustomer.Request.FindCustomerRequestBody;
 import com.example.shopkeeper.findcustomer.Request.FindCustomerRequestEnvelope;
 import com.example.shopkeeper.findcustomer.Response.FindCustomerResponseEnvelope;
@@ -34,6 +33,7 @@ public class Shipping extends AppCompatActivity {
     private Button btngotoPlaceOrder;
     private Button addCustomer;
     private SearchView shipping_search;
+    private View shippingfragment;
 //    private List<ShippingModel> shippingModels = new ArrayList<>();
     private XShippingAdapter mAdapter;
 
@@ -47,6 +47,8 @@ public class Shipping extends AppCompatActivity {
         recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
         shipping_search = findViewById(R.id.menu_search);
         swipeRefreshLayout = findViewById(R.id.swipeforrefshipping);
+        shippingfragment = findViewById(R.id.ShippingFragment);
+        shippingfragment.setVisibility(View.GONE);
         mAdapter = new XShippingAdapter();
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -56,7 +58,8 @@ public class Shipping extends AppCompatActivity {
         mAdapter.setRecyclerViewItemClick(new EasyAdapter.OnRecyclerViewItemClick<FindCustomerModel>() {
             @Override
             public void onRecyclerViewItemClick(View view, FindCustomerModel model) {
-                Toast.makeText(Shipping.this, "Data Printed", Toast.LENGTH_SHORT).show();
+                shippingfragment.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
 
             }
         });
@@ -170,6 +173,7 @@ public void AddShipping(){
     });
 
 }
+
 
 }
 

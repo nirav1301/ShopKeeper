@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dc.codescanner.CodeScannerActivity;
 import com.dc.codescanner.CodeScannerConfig;
 import com.dc.codescanner.controls.ScannerResult;
-import com.example.shopkeeper.authentication.ForgotPasswordActivity;
+import com.example.shopkeeper.sendorder.PlaceOrder;
 import com.example.shopkeeper.authentication.Login.RetrofitGenerator;
 import com.example.shopkeeper.createorder.CreateOrderResponse;
 import com.example.shopkeeper.createorder.Request.CreateOrderRequestBody;
@@ -58,7 +58,6 @@ public class ScannerFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         binding.imgbtnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,9 +128,9 @@ public class ScannerFragment extends Fragment {
                     mAdapter.notifyDataSetChanged();
 
 
-                    /*Intent intent=new Intent(requireContext(), ForgotPasswordActivity.class);
+                    Intent intent=new Intent(requireContext(), PlaceOrder.class);
                     intent.putExtra("abcd",createOrderResponse.getData().get(0));
-                    startActivity(intent);*/
+                    startActivity(intent);
 
 
                 }

@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.ShopKeeper">
-        <activity android:name=".Order.Order_Details_Activity"
+        <activity android:name=".sendinvoice.SendInvoiceActivity"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Home"
             android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".Order.AddCustomer"
             android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".Order.PlaceOrder"
+        <activity android:name=".sendorder.PlaceOrder"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Order.OrderHistory" />
         <activity android:name=".Order.CreateOrder"
