@@ -1,14 +1,23 @@
 package com.example.shopkeeper.Order;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.shopkeeper.R;
+import com.example.shopkeeper.addcustomer.request.AddCustomerRequestBody;
+import com.example.shopkeeper.addcustomer.request.AddCustomerRequestEnvelope;
+import com.example.shopkeeper.addcustomer.response.AddCustomerResponseEnvelope;
+import com.example.shopkeeper.authentication.Login.RetrofitGenerator;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddCustomer extends AppCompatActivity {
     private EditText etCustCompany;
@@ -108,6 +117,71 @@ public class AddCustomer extends AppCompatActivity {
     }
 
     private void addCustomer() {
+        AddCustomerRequestEnvelope requestEnvelope = new AddCustomerRequestEnvelope();
+        AddCustomerRequestBody requestBody = new AddCustomerRequestBody();
+        AddCustomerRequestBody.RequestAddCustomer requestModel = new AddCustomerRequestBody.RequestAddCustomer();
+        requestModel.CompanyCustomerID = "";
+        requestModel.CustomerCompanyName = "";
+        requestModel.CompanyName = "";
+        requestModel.CustomerName = "";
+        requestModel.LoginID = "";
+        requestModel.ActiveStatus = "";
+        requestModel.MailingPhone = "";
+        requestModel.MailingFax = "";
+        requestModel.BusinessLicenseOrPermit = "";
+        requestModel.CustomerFirstName = "";
+        requestModel.CustomerLastName = "";
+        requestModel.RegDate = "";
+        requestModel.LastLogin= "";
+        requestModel.BarcodeCustomerID = "";
+        requestModel.ApprovalStatus = "";
+        requestModel.UserRightsId = "";
+        requestModel.DateTimeRegistered = "";
+        requestModel.ApprovalFlag = "";
+        requestModel.LoginCount = "";
+        requestModel.LoginPassword= "";
+        requestModel.Address = "";
+        requestModel.CompanyId = "";
+        requestModel.ShippingStreet = "";
+        requestModel.ShippingStreet2 = "";
+        requestModel.ShippingStateOrProvince = "";
+        requestModel.ShippingCity = "";
+        requestModel.ShippingCountry = "";
+        requestModel.ShippingZipcode = "";
+        requestModel.ShippingPhone = "";
+        requestModel.SeekLevel = "";
+        requestModel.CurrencyCode = "";
+        requestModel.IsCODCustomer = "";
+        requestModel.IsNET30Customer = "";
+        requestModel.IsSubscribe = "";
+        requestModel.MailingStreet = "";
+        requestModel.MailingStreet1 = "";
+        requestModel.MailingStreet= "";
+        requestModel.MailingStateOrProvince = "";
+        requestModel.MailingZipcode = "";
+        requestModel.MailingCountry = "";
+        requestModel.Note = "";
+        requestModel.CompanyPhoneNumber = "";
+        requestModel.CompanyPhone= "";
+        requestModel.CompanyEmail = "";
+        requestModel.Email = "";
+        requestModel.ShippingAddressID = "";
+        requestModel.CompanyCustomerType = "";
+        requestModel.xmlns = "http://tempuri.org/";
+        requestBody.requestAddCustomer = requestModel;
+        requestEnvelope.body = requestBody;
+        Call<AddCustomerResponseEnvelope> call = RetrofitGenerator.getApiService().addcustomerX(requestEnvelope);
+        call.enqueue(new Callback<AddCustomerResponseEnvelope>() {
+            @Override
+            public void onResponse(Call<AddCustomerResponseEnvelope> call, Response<AddCustomerResponseEnvelope> response) {
+                Toast.makeText(AddCustomer.this, "Customer Added Sucessfully", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<AddCustomerResponseEnvelope> call, Throwable t) {
+
+            }
+        });
 
     }
 }

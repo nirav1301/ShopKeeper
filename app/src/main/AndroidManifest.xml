@@ -14,6 +14,8 @@
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Home"
             android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".forgotpassword.ForgotPasswordActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".Order.AddCustomer"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".sendorder.PlaceOrder"
@@ -28,9 +30,6 @@
             android:name=".HomeScreen.HomeScreenActivity"
             android:windowSoftInputMode="adjustResize"
             android:label="Home Page" />
-        <activity
-            android:name=".authentication.ForgotPasswordActivity"
-            android:label="@string/etforgot_password" />
         <activity android:name=".SplashScreen.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

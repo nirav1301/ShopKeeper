@@ -1,11 +1,15 @@
 package com.example.shopkeeper.authentication.Login;
 
+import com.example.shopkeeper.addcustomer.request.AddCustomerRequestEnvelope;
+import com.example.shopkeeper.addcustomer.response.AddCustomerResponseEnvelope;
 import com.example.shopkeeper.authentication.Login.Request.LoginRequestEnvelope;
 import com.example.shopkeeper.authentication.Login.Response.LoginResponseEnvelope;
 import com.example.shopkeeper.createorder.Request.CreateOrderRequestEnvelope;
 import com.example.shopkeeper.createorder.Response.CreateOrderResponseEnvelope;
 import com.example.shopkeeper.findcustomer.Request.FindCustomerRequestEnvelope;
 import com.example.shopkeeper.findcustomer.Response.FindCustomerResponseEnvelope;
+import com.example.shopkeeper.forgotpassword.request.ForgotPassRequestEnvelope;
+import com.example.shopkeeper.forgotpassword.response.ForgotPasswordResponseEnvelope;
 import com.example.shopkeeper.orderhistory.Request.OrderHistoryRequestEnvelope;
 import com.example.shopkeeper.orderhistory.Response.OrderHistoryResponseEnvelope;
 import com.example.shopkeeper.recentorder.request.RecentOrderRequestEnvelope;
@@ -29,12 +33,22 @@ public interface ApiService {
 //    @POST("myservice.asmx")
 //    Call<ForgotPasswordResponseEnvelope> forgotPasswordEmailX(@Body ForgotPassRequestEnvelope forgotPassRequestEnvelope);
 
+
     @Headers({
             "Content-Type: text/xml;charset=UTF-8",
             "SOAPAction: http://tempuri.org/ValidateUser"}
     )
     @POST("myservice.asmx")
     Call<LoginResponseEnvelope> validateUserX(@Body LoginRequestEnvelope loginRequestEnvelope);
+
+    @Headers({
+            "Content-Type: text/xml;charset=UTF-8",
+            "SOAPAction: http://tempuri.org/ForgotPasswordEmail"}
+    )
+
+    @POST("myservice.asmx")
+    Call<ForgotPasswordResponseEnvelope> forgotPasswordEmailX(@Body ForgotPassRequestEnvelope forgotPassRequestEnvelope);
+
     @Headers({
             "Content-Type: text/xml;charset=UTF-8",
             "SOAPAction: http://tempuri.org/GetRecentOrders"}
@@ -75,6 +89,13 @@ public interface ApiService {
     )
     @POST("myservice.asmx")
     Call<SendOrderResponseEnvelope> sendorderX(@Body SendOrderRequestEnvelope sendOrderRequestEnvelope);
+
+    @Headers({
+            "Content-Type: text/xml;charset=UTF-8",
+            "SOAPAction: http://tempuri.org/SendOrder"}
+    )
+    @POST("myservice.asmx")
+    Call<AddCustomerResponseEnvelope> addcustomerX(@Body AddCustomerRequestEnvelope addCustomerRequestEnvelope);
 
 
 }
