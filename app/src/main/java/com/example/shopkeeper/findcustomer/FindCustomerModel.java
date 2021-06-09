@@ -1,8 +1,11 @@
 package com.example.shopkeeper.findcustomer;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class FindCustomerModel {
+import java.io.Serializable;
+
+public class FindCustomerModel implements Serializable {
 
     @SerializedName("CompanyCustomerID")
     @Expose

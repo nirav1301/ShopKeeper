@@ -18,12 +18,12 @@
             android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".Order.AddCustomer"
             android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".sendorder.PlaceOrder"
+        <activity android:name=".sendorder.PlaceOrderActivity"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Order.OrderHistory" />
         <activity android:name=".Order.CreateOrder"
             android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".findcustomer.Shipping"
+        <activity android:name=".findcustomer.ShippingActivity"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Order.Scanner" />
         <activity

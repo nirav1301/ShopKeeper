@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -13,29 +15,30 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.shopkeeper.authentication.Login.RetrofitGenerator;
 import com.example.shopkeeper.R;
+import com.example.shopkeeper.authentication.Login.RetrofitGenerator;
 import com.example.shopkeeper.orderhistory.Request.OrderHistoryRequestBody;
 import com.example.shopkeeper.orderhistory.Request.OrderHistoryRequestEnvelope;
 import com.example.shopkeeper.orderhistory.Response.OrderHistoryResponseEnvelope;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 import easyadapter.dc.com.library.EasyAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrderHistory_fragment extends Fragment  {
+public class OrderHistoryFragment extends Fragment {
     private String demo;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerview;
     private SearchView orderHistorySearch;
     private OrderHistoryAdapter mAdapter;
 
-    public OrderHistory_fragment() {
+    public OrderHistoryFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -58,6 +61,19 @@ public class OrderHistory_fragment extends Fragment  {
         recyclerview.setLayoutManager(mLayoutManager);
         recyclerview.setItemAnimator(new DefaultItemAnimator());
         demo = orderHistorySearch.getQuery().toString();
+        orderHistorySearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchQuery(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchQuery(newText);
+                return false;
+            }
+        });
         recyclerview.setAdapter(mAdapter);
         getOrderHistory();
         mAdapter.setRecyclerViewItemClick(new EasyAdapter.OnRecyclerViewItemClick<OrderHistoryModel>() {
@@ -69,7 +85,7 @@ public class OrderHistory_fragment extends Fragment  {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-              getOrderHistory();
+                getOrderHistory();
             }
         });
 
@@ -78,8 +94,33 @@ public class OrderHistory_fragment extends Fragment  {
 
 
     }
-    public void getOrderHistory(){
-        OrderHistoryRequestEnvelope requestEnvelope = new  OrderHistoryRequestEnvelope();
+
+    private void searchQuery(String keyword) {
+        mAdapter.performFilter(keyword, new EasyAdapter.OnFilter<OrderHistoryModel>() {
+            @Override
+            public boolean onFilterApply(@Nullable Object keyword, @NonNull OrderHistoryModel model) {
+                if (keyword.toString().equalsIgnoreCase(String.valueOf(model.getInventoryOrderID()))) {
+                    return true;
+                }
+
+                if (keyword.toString().equalsIgnoreCase(String.valueOf(model.getCompanyName()))) {
+                    return true;
+                }
+
+                return false;
+            }
+
+            @Override
+            public void onFilterResult(ArrayList<OrderHistoryModel> filteredList) {
+                mAdapter.clear(false);
+                mAdapter.addAll(filteredList, false);
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    public void getOrderHistory() {
+        OrderHistoryRequestEnvelope requestEnvelope = new OrderHistoryRequestEnvelope();
         OrderHistoryRequestBody requestBody = new OrderHistoryRequestBody();
         OrderHistoryRequestBody.RequestOrderHistory requestModel = new OrderHistoryRequestBody.RequestOrderHistory();
         requestModel.companyId = "10004";
@@ -96,11 +137,11 @@ public class OrderHistory_fragment extends Fragment  {
         call.enqueue(new Callback<OrderHistoryResponseEnvelope>() {
             @Override
             public void onResponse(Call<OrderHistoryResponseEnvelope> call, Response<OrderHistoryResponseEnvelope> response) {
-               swipeRefreshLayout.setRefreshing(false);
+                swipeRefreshLayout.setRefreshing(false);
                 Gson gson = new Gson();
                 OrderHistoryResponse orderHistoryResponse = gson.fromJson(response.body().body.
-                        orderHistoryResponseModel.GetOrderHistryResult,OrderHistoryResponse.class);
-                if(orderHistoryResponse.getSetting().getSuccess()){
+                        orderHistoryResponseModel.GetOrderHistryResult, OrderHistoryResponse.class);
+                if (orderHistoryResponse.getSetting().getSuccess()) {
                     mAdapter.clear(false);
                     mAdapter.addAll(orderHistoryResponse.getData(), false);
                     mAdapter.notifyDataSetChanged();
@@ -109,7 +150,7 @@ public class OrderHistory_fragment extends Fragment  {
 
             @Override
             public void onFailure(Call<OrderHistoryResponseEnvelope> call, Throwable t) {
-               swipeRefreshLayout.setRefreshing(false);
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }

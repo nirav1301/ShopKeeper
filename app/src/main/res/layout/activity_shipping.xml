@@ -2,101 +2,105 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#F8FBFB"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".findcustomer.Shipping">
+    android:background="#F8FBFB"
+    tools:context=".findcustomer.ShippingActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/txtshipping"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginEnd="156dp"
-        android:fontFamily="@font/gilory_bold"
-        android:layout_marginTop="15dp"
-        android:text="Shipping"
-        android:textSize="25sp" />
+        <TextView
+            android:id="@+id/txtshipping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="156dp"
+            android:fontFamily="@font/gilory_bold"
+            android:text="Shipping"
+            android:textSize="25sp" />
 
-    <androidx.cardview.widget.CardView
-       android:layout_width="match_parent"
-        android:id="@+id/card_view"
-        android:layout_marginTop="10dp"
-       android:layout_below="@id/txtshipping"
-        android:padding="10dp"
-        app:cardUseCompatPadding="true"
-        app:cardCornerRadius="15dp"
-        app:cardPreventCornerOverlap="true"
-       android:layout_height="wrap_content">
-     <RelativeLayout
-         android:layout_width="match_parent"
-         android:layout_height="match_parent">
-         <SearchView
-             android:id="@+id/menu_search"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:queryHint="Search Customer"
-             android:background="@drawable/edittext_border"
-             android:layout_marginLeft="20dp"
-             android:layout_marginRight="20dp"
-             android:gravity="center_horizontal"
-             android:layout_marginTop="15dp"
-             />
-         <fragment
-             android:layout_width="match_parent"
-             android:layout_height="490dp"
-             android:layout_marginTop="10dp"
-             android:layout_below="@id/menu_search"
-             android:id="@+id/ShippingFragment"
-             android:name="com.example.shopkeeper.findcustomer.ShippingFragment"
-             tools:layout="@layout/fragment_shipping" />
-         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-             android:layout_width="match_parent"
-             android:layout_height="490dp"
-             android:id="@+id/swipeforrefshipping"
-             android:layout_below="@+id/menu_search"
-             android:layout_marginTop="10dp">
-         <androidx.recyclerview.widget.RecyclerView
-             android:layout_width="match_parent"
-             android:layout_height="490dp"
-             android:id="@+id/recycler_view"
-            />
-         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtshipping"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            app:cardCornerRadius="15dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true">
 
-         <androidx.appcompat.widget.AppCompatButton
-             android:id="@+id/btngotoplaceorder"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_below="@+id/swipeforrefshipping"
-             android:layout_marginTop="25dp"
-             android:layout_marginLeft="40dp"
-             android:layout_marginRight="40dp"
-             android:background="@drawable/rounded_button"
-             android:text="Continue"
-             android:layout_marginBottom="15dp"
-             android:textColor="@color/white" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <SearchView
+                    android:id="@+id/menu_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/edittext_border"
+                    android:gravity="center_horizontal"
+                    android:queryHint="Search Customer" />
+
+                <FrameLayout
+                    android:id="@+id/ShippingFragment"
+                    android:name="com.example.shopkeeper.findcustomer.ShippingFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="490dp"
+                    android:layout_below="@id/menu_search"
+                    android:layout_marginTop="10dp"
+                    tools:layout="@layout/fragment_shipping" />
+
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/swipeforrefshipping"
+                    android:layout_width="match_parent"
+                    android:layout_height="490dp"
+                    android:layout_below="@+id/menu_search"
+                    android:layout_marginTop="10dp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="490dp" />
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btngotoplaceorder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/swipeforrefshipping"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/rounded_button"
+                    android:text="Continue"
+                    android:textColor="@color/white" />
 
 
-     </RelativeLayout>
+            </RelativeLayout>
 
-   </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnaddcustomer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/card_view"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginRight="90dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/rounded_button_grey"
-        android:text="Add Customer"
-        android:textColor="@color/black" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnaddcustomer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card_view"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="41dp"
+            android:layout_marginRight="90dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_button_grey"
+            android:text="Add Customer"
+            android:textColor="@color/black" />
     </RelativeLayout>
 
 </ScrollView>

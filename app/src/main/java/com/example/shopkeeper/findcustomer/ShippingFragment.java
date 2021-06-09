@@ -21,11 +21,12 @@ public class ShippingFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private FindCustomerModel findCustomerModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        findCustomerModel = (FindCustomerModel) getArguments().getSerializable("model");
     }
 
     @Override
@@ -42,7 +43,9 @@ public class ShippingFragment extends Fragment {
             }
         });
         return view;
+    }
 
+    public void setData(Object s) {
 
     }
 }

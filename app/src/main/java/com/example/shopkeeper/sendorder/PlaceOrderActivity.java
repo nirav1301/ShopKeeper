@@ -21,7 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PlaceOrder extends AppCompatActivity {
+public class PlaceOrderActivity extends AppCompatActivity {
     private Button btnPlaceOrder;
 
     @Override
@@ -29,40 +29,38 @@ public class PlaceOrder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_order);
         btnPlaceOrder = findViewById(R.id.btnplaceorder);
-        CreateOrderModel createOrderModel= (CreateOrderModel) getIntent().getSerializableExtra("abcd");
+        CreateOrderModel createOrderModel = (CreateOrderModel) getIntent().getSerializableExtra("abcd");
         btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // sendOrder();
-                AlertDialog alertDialog = new AlertDialog.Builder(PlaceOrder.this).create();
+                AlertDialog alertDialog = new AlertDialog.Builder(PlaceOrderActivity.this).create();
                 alertDialog.setTitle("Alert");
                 alertDialog.setMessage("Good Job");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent i = new Intent(PlaceOrder.this, SendInvoiceActivity.class);
+                                Intent i = new Intent(PlaceOrderActivity.this, SendInvoiceActivity.class);
                                 startActivity(i);
                                 dialog.dismiss();
                             }
                         });
-
-
-
                 alertDialog.show();
             }
         });
     }
-    public void sendOrder(){
+
+    public void sendOrder() {
         SendOrderRequestEnvelope requestEnvelope = new SendOrderRequestEnvelope();
         SendOrderRequestBody requestBody = new SendOrderRequestBody();
-        SendOrderRequestBody.RequestSendOrder requestModel = new  SendOrderRequestBody.RequestSendOrder();
+        SendOrderRequestBody.RequestSendOrder requestModel = new SendOrderRequestBody.RequestSendOrder();
         requestModel.AdminId = "";
-        requestModel.CompanyId= "";
-        requestModel.CustomerId ="";
-        requestModel.OrderNote="";
+        requestModel.CompanyId = "";
+        requestModel.CustomerId = "";
+        requestModel.OrderNote = "";
         requestModel.ProductStyle = "";
-        requestModel.CompanyWebsite ="";
-        requestModel.ProductInfo ="";
+        requestModel.CompanyWebsite = "";
+        requestModel.ProductInfo = "";
         requestModel.xmlns = "http://tempuri.org/";
         requestBody.requestSendOrder = requestModel;
         requestEnvelope.body = requestBody;

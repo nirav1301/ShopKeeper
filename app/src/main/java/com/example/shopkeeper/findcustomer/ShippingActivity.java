@@ -13,42 +13,48 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.shopkeeper.Order.AddCustomer;
-import com.example.shopkeeper.sendorder.PlaceOrder;
 import com.example.shopkeeper.R;
 import com.example.shopkeeper.authentication.Login.RetrofitGenerator;
+import com.example.shopkeeper.createorder.CreateOrderModel;
 import com.example.shopkeeper.findcustomer.Request.FindCustomerRequestBody;
 import com.example.shopkeeper.findcustomer.Request.FindCustomerRequestEnvelope;
 import com.example.shopkeeper.findcustomer.Response.FindCustomerResponseEnvelope;
+import com.example.shopkeeper.sendorder.PlaceOrderActivity;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 import easyadapter.dc.com.library.EasyAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Shipping extends AppCompatActivity {
-//    private BottomNavigationView bottomNavigationView;
+public class ShippingActivity extends AppCompatActivity {
+    //    private BottomNavigationView bottomNavigationView;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
     private Button btngotoPlaceOrder;
     private Button addCustomer;
     private SearchView shipping_search;
     private View shippingfragment;
-//    private List<ShippingModel> shippingModels = new ArrayList<>();
+    //    private List<ShippingModel> shippingModels = new ArrayList<>();
     private XShippingAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shipping);
+
+        ArrayList<CreateOrderModel> data = (ArrayList<CreateOrderModel>) getIntent().getSerializableExtra("data");
+
+
         addCustomer = findViewById(R.id.btnaddcustomer);
         btngotoPlaceOrder = findViewById(R.id.btngotoplaceorder);
 //        bottomNavigationView = findViewById(R.id.bottom_navigation);
-        recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         shipping_search = findViewById(R.id.menu_search);
         swipeRefreshLayout = findViewById(R.id.swipeforrefshipping);
         shippingfragment = findViewById(R.id.ShippingFragment);
-        shippingfragment.setVisibility(View.GONE);
         mAdapter = new XShippingAdapter();
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -58,9 +64,20 @@ public class Shipping extends AppCompatActivity {
         mAdapter.setRecyclerViewItemClick(new EasyAdapter.OnRecyclerViewItemClick<FindCustomerModel>() {
             @Override
             public void onRecyclerViewItemClick(View view, FindCustomerModel model) {
-                shippingfragment.setVisibility(View.VISIBLE);
-                recyclerView.setVisibility(View.GONE);
 
+                shippingfragment.setVisibility(View.VISIBLE);
+
+                ShippingFragment shippingFragment = new ShippingFragment();
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("model", model);
+                shippingFragment.setArguments(bundle);
+
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.ShippingFragment, shippingFragment)
+                        .commit();
+                recyclerView.setVisibility(View.GONE);
             }
         });
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -69,7 +86,6 @@ public class Shipping extends AppCompatActivity {
                 AddShipping();
             }
         });
-
 
 
 //        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -98,7 +114,7 @@ public class Shipping extends AppCompatActivity {
         btngotoPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Shipping.this, PlaceOrder.class);
+                Intent intent = new Intent(ShippingActivity.this, PlaceOrderActivity.class);
                 startActivity(intent);
 
             }
@@ -106,14 +122,14 @@ public class Shipping extends AppCompatActivity {
         addCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Shipping.this, AddCustomer.class);
+                Intent intent = new Intent(ShippingActivity.this, AddCustomer.class);
                 startActivity(intent);
             }
         });
 
     }
 
-//    private void shippingList() {
+    //    private void shippingList() {
 //        ShippingModel shippingModel = new ShippingModel("Hidden Brains infotech pvt ltd","Nirav",
 //                "Vasava","Jodhpur Char rasta","Ahmedabad","Gujarat","380008",
 //                "India","9090946464","hiddenbrains@hotmail.com");
@@ -141,38 +157,38 @@ public class Shipping extends AppCompatActivity {
 //
 //    }
 //
-public void AddShipping(){
-    FindCustomerRequestEnvelope requestEnvelope = new FindCustomerRequestEnvelope();
-    FindCustomerRequestBody requestBody = new FindCustomerRequestBody();
-    FindCustomerRequestBody.RequestFindCustomer requestModel = new FindCustomerRequestBody.RequestFindCustomer();
-    requestModel.searchtext = "L";
-    requestModel.companyId = "10004";
-    requestModel.xmlns = "http://tempuri.org/";
-    requestBody.requestFindCustomer = requestModel;
-    requestEnvelope.body = requestBody;
-    Call<FindCustomerResponseEnvelope> call = RetrofitGenerator.getApiService().findCutomerX(requestEnvelope);
-    call.enqueue(new Callback<FindCustomerResponseEnvelope>() {
-        @Override
-        public void onResponse(Call<FindCustomerResponseEnvelope> call, Response<FindCustomerResponseEnvelope> response) {
-            swipeRefreshLayout.setRefreshing(false);
-            Gson gson = new Gson();
-            FindCustomerResponse findCustomerResponse = gson.fromJson(response.body().
-                    body.findCustomerReponseModel.FindCustomerResult,FindCustomerResponse.class);
-           if(findCustomerResponse.getSetting().getSuccess()){
-               mAdapter.clear(false);
-               mAdapter.addAll(findCustomerResponse.getData(), false);
-               mAdapter.notifyDataSetChanged();
+    public void AddShipping() {
+        FindCustomerRequestEnvelope requestEnvelope = new FindCustomerRequestEnvelope();
+        FindCustomerRequestBody requestBody = new FindCustomerRequestBody();
+        FindCustomerRequestBody.RequestFindCustomer requestModel = new FindCustomerRequestBody.RequestFindCustomer();
+        requestModel.searchtext = "L";
+        requestModel.companyId = "10004";
+        requestModel.xmlns = "http://tempuri.org/";
+        requestBody.requestFindCustomer = requestModel;
+        requestEnvelope.body = requestBody;
+        Call<FindCustomerResponseEnvelope> call = RetrofitGenerator.getApiService().findCutomerX(requestEnvelope);
+        call.enqueue(new Callback<FindCustomerResponseEnvelope>() {
+            @Override
+            public void onResponse(Call<FindCustomerResponseEnvelope> call, Response<FindCustomerResponseEnvelope> response) {
+                swipeRefreshLayout.setRefreshing(false);
+                Gson gson = new Gson();
+                FindCustomerResponse findCustomerResponse = gson.fromJson(response.body().
+                        body.findCustomerReponseModel.FindCustomerResult, FindCustomerResponse.class);
+                if (findCustomerResponse.getSetting().getSuccess()) {
+                    mAdapter.clear(false);
+                    mAdapter.addAll(findCustomerResponse.getData(), false);
+                    mAdapter.notifyDataSetChanged();
 
-           }
-        }
+                }
+            }
 
-        @Override
-        public void onFailure(Call<FindCustomerResponseEnvelope> call, Throwable t) {
-            swipeRefreshLayout.setRefreshing(false);
-        }
-    });
+            @Override
+            public void onFailure(Call<FindCustomerResponseEnvelope> call, Throwable t) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
-}
+    }
 
 
 }

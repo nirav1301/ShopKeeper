@@ -18,17 +18,19 @@ import com.dc.codescanner.CodeScannerActivity;
 import com.dc.codescanner.CodeScannerConfig;
 import com.dc.codescanner.controls.ScannerResult;
 import com.example.shopkeeper.authentication.Login.RetrofitGenerator;
+import com.example.shopkeeper.createorder.CreateOrderModel;
 import com.example.shopkeeper.createorder.CreateOrderResponse;
 import com.example.shopkeeper.createorder.Request.CreateOrderRequestBody;
 import com.example.shopkeeper.createorder.Request.CreateOrderRequestEnvelope;
 import com.example.shopkeeper.createorder.Response.CreateOrderResponseEnvelope;
 import com.example.shopkeeper.createorder.XAddProductAdapter;
 import com.example.shopkeeper.databinding.FragmentScannerFragmentBinding;
-import com.example.shopkeeper.findcustomer.Shipping;
+import com.example.shopkeeper.findcustomer.ShippingActivity;
 import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
+import easyadapter.dc.com.library.EasyAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,6 +47,16 @@ public class ScannerFragment extends Fragment {
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAdapter = new XAddProductAdapter();
+        mAdapter.setRecyclerViewItemClick(new EasyAdapter.OnRecyclerViewItemClick<CreateOrderModel>() {
+            @Override
+            public void onRecyclerViewItemClick(View view, CreateOrderModel model) {
+                switch (view.getId()) {
+                    case R.id.imgbtndelete:
+                        mAdapter.remove(model);
+                        break;
+                }
+            }
+        });
     }
 
     @Override
@@ -60,7 +72,8 @@ public class ScannerFragment extends Fragment {
         binding.imgbtnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), Shipping.class);
+                Intent i = new Intent(getActivity(), ShippingActivity.class);
+                i.putExtra("data", mAdapter.getData());
                 startActivity(i);
                 ((Activity) getActivity()).overridePendingTransition(0, 0);
             }
@@ -95,7 +108,7 @@ public class ScannerFragment extends Fragment {
             if (resultCode == Activity.RESULT_OK) {
                 ScannerResult scannerResult = data.getParcelableExtra((CodeScannerActivity.Companion.getRESULT_KEY()));
                 myResult = scannerResult.getResult();
-                pCode = myResult.substring(0,6);
+                pCode = myResult.substring(0, 6);
                 cCode = myResult.substring(7);
                 addProductToList();
             }
@@ -103,13 +116,13 @@ public class ScannerFragment extends Fragment {
     }
 
     private void addProductToList() {
-        CreateOrderRequestEnvelope requestEnvelope = new  CreateOrderRequestEnvelope();
+        CreateOrderRequestEnvelope requestEnvelope = new CreateOrderRequestEnvelope();
         CreateOrderRequestBody requestBody = new CreateOrderRequestBody();
         CreateOrderRequestBody.RequestCreateOrder requestModel = new CreateOrderRequestBody.RequestCreateOrder();
         requestModel.companyId = "10004";
         requestModel.productId = pCode;
         requestModel.colorId = cCode;
-        requestModel.userId ="740";
+        requestModel.userId = "740";
         requestModel.xmlns = "http://tempuri.org/";
         requestBody.requestCreateOrder = requestModel;
         requestEnvelope.body = requestBody;
@@ -120,8 +133,8 @@ public class ScannerFragment extends Fragment {
             public void onResponse(Call<CreateOrderResponseEnvelope> call, Response<CreateOrderResponseEnvelope> response) {
                 Gson gson = new Gson();
                 CreateOrderResponse createOrderResponse = gson.fromJson(response.body().body.
-                        createOrderResponseModel.GetProductDetailByProductCodeResult,CreateOrderResponse.class);
-                if(createOrderResponse.getSetting().getSuccess()==true){
+                        createOrderResponseModel.GetProductDetailByProductCodeResult, CreateOrderResponse.class);
+                if (createOrderResponse.getSetting().getSuccess() == true) {
                     /*mAdapter.clear(false);*/
                     mAdapter.addAll(createOrderResponse.getData(), false);
                     mAdapter.notifyDataSetChanged();

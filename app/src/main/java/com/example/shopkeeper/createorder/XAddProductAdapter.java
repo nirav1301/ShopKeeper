@@ -17,14 +17,31 @@ public class XAddProductAdapter extends EasyAdapter<CreateOrderModel, AddProduct
     }
 
     @Override
+    public void onCreatingHolder(@NonNull AddProductBinding binding, @NonNull EasyHolder holder) {
+        super.onCreatingHolder(binding, holder);
+        binding.imgbtndelete.setOnClickListener(holder.getClickListener());
+        /*binding.imgBtnPluQuantity.setOnClickListener(holder.getClickListener());*/
+    }
+
+    @Override
     public void onBind(@NonNull AddProductBinding addProductBinding, @NonNull CreateOrderModel createOrderModel) {
-        ProductColorImageAPI productColorImageAPI = new ProductColorImageAPI();
         addProductBinding.productUnitPrice.setText(String.valueOf(createOrderModel.getUnitPrice()));
         addProductBinding.productStyleNumber.setText(String.valueOf(createOrderModel.getStyleNo()));
         addProductBinding.productCategoryName.setText(String.valueOf(createOrderModel.getCat1Name()));
         addProductBinding.productSizeRatio.setText(String.valueOf(createOrderModel.getSizeRatio()));
-        Glide.with(addProductBinding.imgViewProductImg)
-                .load(productColorImageAPI.getColorSmallImageUrl()).into(addProductBinding.imgViewProductImg);
+
+        if (createOrderModel.getProductColorImageAPIs() != null && createOrderModel.getProductColorImageAPIs().size() > 0) {
+            Glide.with(addProductBinding.imgViewProductImg)
+                    .load(createOrderModel.getProductColorImageAPIs().get(0).getColorMediumImageUrl())
+                    .placeholder(R.drawable.ic_search)
+                    .error(R.drawable.ic_search)
+                    .into(addProductBinding.imgViewProductImg);
+        } else {
+            Glide.with(addProductBinding.imgViewProductImg).load("")
+                    .placeholder(R.drawable.ic_search)
+                    .error(R.drawable.ic_search)
+                    .into(addProductBinding.imgViewProductImg);
+        }
 //        addProductBinding.productExpectedDate.setText(String.valueOf(createOrderModel.getExpectedDate()));
         addProductBinding.productColor.setText(String.valueOf(createOrderModel.getColor()));
         String qualityString = addProductBinding.productQuantity.getText().toString();
@@ -33,7 +50,7 @@ public class XAddProductAdapter extends EasyAdapter<CreateOrderModel, AddProduct
             int totalPrice = quantity * createOrderModel.getUnitPrice();
             addProductBinding.productTotalPrice.setText(String.valueOf(totalPrice));
         } else {
-            int quantity =5;
+            int quantity = 5;
             int totalPrice = quantity * createOrderModel.getUnitPrice();
             addProductBinding.productTotalPrice.setText(String.valueOf(totalPrice));
         }
@@ -42,12 +59,10 @@ public class XAddProductAdapter extends EasyAdapter<CreateOrderModel, AddProduct
             public void onClick(View v) {
                 String quantity = addProductBinding.productQuantity.getText().toString();
                 int minusQuantity = Integer.parseInt(quantity);
-                minusQuantity = minusQuantity - 1 ;
+                minusQuantity = minusQuantity - 1;
                 addProductBinding.productQuantity.setText(String.valueOf(minusQuantity));
                 int totalPrice = minusQuantity * createOrderModel.getUnitPrice();
                 addProductBinding.productTotalPrice.setText(String.valueOf(totalPrice));
-
-
             }
         });
         addProductBinding.imgBtnPluQuantity.setOnClickListener(new View.OnClickListener() {
@@ -55,23 +70,22 @@ public class XAddProductAdapter extends EasyAdapter<CreateOrderModel, AddProduct
             public void onClick(View v) {
                 String quantity = addProductBinding.productQuantity.getText().toString();
                 int plusQuantity = Integer.parseInt(quantity);
-                plusQuantity = plusQuantity + 1 ;
+                plusQuantity = plusQuantity + 1;
                 addProductBinding.productQuantity.setText(String.valueOf(plusQuantity));
                 int totalPrice = plusQuantity * createOrderModel.getUnitPrice();
                 addProductBinding.productTotalPrice.setText(String.valueOf(totalPrice));
-
             }
         });
 
 
-        addProductBinding.imgbtndelete.setOnClickListener(new View.OnClickListener() {
+        /*addProductBinding.imgbtndelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                removeOnly(getData().indexOf(createOrderModel));
                notifyDataSetChanged();
 
             }
-        });
+        });*/
 
 
     }

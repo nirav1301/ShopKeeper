@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.shopkeeper.orderhistory.OrderHistory_fragment;
+import com.example.shopkeeper.orderhistory.OrderHistoryFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Home extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
@@ -47,7 +47,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                 break;
 
             case R.id.order:
-                fragment = new OrderHistory_fragment();
+                fragment = new OrderHistoryFragment();
                 break;
 
         }
