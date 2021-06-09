@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,7 +25,6 @@ import com.example.shopkeeper.createorder.Response.CreateOrderResponseEnvelope;
 import com.example.shopkeeper.createorder.XAddProductAdapter;
 import com.example.shopkeeper.databinding.FragmentScannerFragmentBinding;
 import com.example.shopkeeper.findcustomer.Shipping;
-import com.example.shopkeeper.sendorder.PlaceOrder;
 import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
@@ -42,7 +40,6 @@ public class ScannerFragment extends Fragment {
     private String pCode;
     private String cCode;
     private XAddProductAdapter mAdapter;
-    private TextView coProductStyle;
 
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -130,9 +127,9 @@ public class ScannerFragment extends Fragment {
                     mAdapter.notifyDataSetChanged();
 
 
-                    Intent intent=new Intent(requireContext(), PlaceOrder.class);
-                    intent.putExtra("abcd",createOrderResponse.getData().get(0));
-                    startActivity(intent);
+//                    Intent intent=new Intent(requireContext(), PlaceOrder.class);
+//                    intent.putExtra("abcd",createOrderResponse.getData().get(0));
+//                    startActivity(intent);
 
 
                 }
