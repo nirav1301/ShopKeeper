@@ -99,11 +99,11 @@ public class OrderHistoryFragment extends Fragment {
         mAdapter.performFilter(keyword, new EasyAdapter.OnFilter<OrderHistoryModel>() {
             @Override
             public boolean onFilterApply(@Nullable Object keyword, @NonNull OrderHistoryModel model) {
-                if (keyword.toString().equalsIgnoreCase(String.valueOf(model.getInventoryOrderID()))) {
+                if (String.valueOf(model.getInventoryOrderID()).toLowerCase().contains(keyword.toString().toLowerCase())) {
                     return true;
                 }
 
-                if (keyword.toString().equalsIgnoreCase(String.valueOf(model.getCompanyName()))) {
+                if (String.valueOf(model.getCompanyName()).toLowerCase().contains(keyword.toString().toLowerCase())) {
                     return true;
                 }
 
@@ -142,8 +142,8 @@ public class OrderHistoryFragment extends Fragment {
                 OrderHistoryResponse orderHistoryResponse = gson.fromJson(response.body().body.
                         orderHistoryResponseModel.GetOrderHistryResult, OrderHistoryResponse.class);
                 if (orderHistoryResponse.getSetting().getSuccess()) {
-                    mAdapter.clear(false);
-                    mAdapter.addAll(orderHistoryResponse.getData(), false);
+                    mAdapter.clear(true);
+                    mAdapter.addAll(orderHistoryResponse.getData(), true);
                     mAdapter.notifyDataSetChanged();
                 }
             }

@@ -13,7 +13,7 @@
         android:layout_height="230dp"
         android:background="@color/white"
         android:fontFamily="serif"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:text="SHOP KEEPER"
         android:textAlignment="center"
         android:textColor="#777575"
