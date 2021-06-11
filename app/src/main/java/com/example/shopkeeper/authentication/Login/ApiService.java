@@ -96,8 +96,6 @@ public interface ApiService {
     )
     @POST("myservice.asmx")
     Call<AddCustomerResponseEnvelope> addcustomerX(@Body AddCustomerRequestEnvelope addCustomerRequestEnvelope);
-
-
 }
 
 

@@ -75,7 +75,10 @@ public class PlaceOrderActivity extends AppCompatActivity {
         requestModel.OrderNote = binding.etordernote.getText().toString();
         requestModel.ProductStyle = "";
         requestModel.CompanyWebsite = "";
-        requestModel.ProductInfo = "";
+
+
+
+
         requestModel.xmlns = "http://tempuri.org/";
         requestBody.requestSendOrder = requestModel;
         requestEnvelope.body = requestBody;
