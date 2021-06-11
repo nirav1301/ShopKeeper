@@ -23,8 +23,6 @@ public class SendOrderRequestBody {
 
     public static class RequestSendOrder {
 
-
-
         @Element(name = "AdminId", required = false)
         public String AdminId;
 
