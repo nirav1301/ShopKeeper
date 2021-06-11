@@ -43,14 +43,14 @@ public class PlaceOrderActivity extends AppCompatActivity {
         pocompanycity = findViewById(R.id.pocomapnycity);
         pocompanystate = findViewById(R.id.pocompanystate);
         pocompanyzipcode = findViewById(R.id.pocompanyzipcode);
-        pocompanyname.setText(findCustomerModel.getCustomerCompanyName());
-        pocompanystreet.setText(findCustomerModel.getShippingStreet());
-        pocompanycity.setText(findCustomerModel.getShippingCity());
-        pocompanystate.setText(findCustomerModel.getShippingStateOrProvince());
-        pocompanyzipcode.setText(findCustomerModel.getShippingZipcode());
 
-        findCustomerModel = (FindCustomerModel) getIntent().getSerializableExtra("model");
+        findCustomerModel = (FindCustomerModel) getIntent().getSerializableExtra("data");
         CreateOrderModel createOrderModel = (CreateOrderModel) getIntent().getSerializableExtra("abcd");
+//        pocompanyname.setText(findCustomerModel.getCustomerCompanyName());
+//        pocompanystreet.setText(findCustomerModel.getShippingStreet());
+//        pocompanycity.setText(findCustomerModel.getShippingCity());
+//        pocompanystate.setText(findCustomerModel.getShippingStateOrProvince());
+//        pocompanyzipcode.setText(findCustomerModel.getShippingZipcode());
 
         btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -54,13 +54,7 @@ public class ShippingFragment extends Fragment {
         companyCountry = view.findViewById(R.id.txtshippingcountryname);
         companyZipcode = view.findViewById(R.id.txtshippingzipcode);
         companyPhone = view.findViewById(R.id.txtshippingphone);
-        companyName.setText(findCustomerModel.getCustomerCompanyName());
-        companyStreet.setText(findCustomerModel.getShippingStreet());
-        companyCity.setText(findCustomerModel.getShippingCity());
-        companyState.setText(findCustomerModel.getShippingStateOrProvince());
-        companyCountry.setText(findCustomerModel.getShippingCountry());
-        companyZipcode.setText(findCustomerModel.getShippingZipcode());
-        companyPhone.setText(findCustomerModel.getMailingPhone());
+        setData(shippingFragment);
 
 
         closeFragment.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +73,14 @@ public class ShippingFragment extends Fragment {
     }
 
     public void setData(Object s) {
+        companyName.setText(findCustomerModel.getCustomerCompanyName());
+        companyStreet.setText(findCustomerModel.getShippingStreet());
+        companyCity.setText(findCustomerModel.getShippingCity());
+        companyState.setText(findCustomerModel.getShippingStateOrProvince());
+        companyCountry.setText(findCustomerModel.getShippingCountry());
+        companyZipcode.setText(findCustomerModel.getShippingZipcode());
+        companyPhone.setText(findCustomerModel.getMailingPhone());
+
 
     }
 }

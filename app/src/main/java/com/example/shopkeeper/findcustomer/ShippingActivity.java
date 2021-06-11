@@ -135,6 +135,10 @@ public class ShippingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ShippingActivity.this, PlaceOrderActivity.class);
                 startActivity(intent);
+//                ArrayList<FindCustomerModel> data = (ArrayList<FindCustomerModel>) getIntent().getSerializableExtra("data");
+//                     Intent intent=new Intent(ShippingActivity.this, PlaceOrderActivity.class);
+//                        intent.putExtra("data",data);
+//                          startActivity(intent);
 
             }
         });
