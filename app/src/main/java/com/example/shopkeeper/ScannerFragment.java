@@ -94,7 +94,7 @@ public class ScannerFragment extends Fragment {
 //                }
 
                     Intent i = new Intent(getActivity(), ShippingActivity.class);
-                    i.putExtra("data", mAdapter.getData());
+                    i.putExtra("items", mAdapter.getData());
                     startActivity(i);
                     ((Activity) getActivity()).overridePendingTransition(0, 0);
 

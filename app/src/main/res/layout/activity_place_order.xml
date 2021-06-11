@@ -1,184 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#F8FBFB"
-    tools:context=".sendorder.PlaceOrderActivity">
 
-    <EditText
-        android:id="@+id/etordernote"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="44dp"
-        android:background="@drawable/edittext_border"
-        android:ems="20"
-        android:gravity="start|top"
-        android:hint="Order note"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toTopOf="@+id/btnplaceorder"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="match_parent"
+        android:background="#F8FBFB"
+        tools:context=".sendorder.PlaceOrderActivity">
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/poproductstyle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pocompanystate">
-
-        <androidx.recyclerview.widget.RecyclerView
+        <EditText
+            android:id="@+id/etordernote"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="0dp"
-            tools:listitem="@layout/add_product" />
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/gilory_extra_bold"
-        android:text="Order"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        />
-
-    <TextView
-        android:id="@+id/pocompanyname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="64dp"
-        android:fontFamily="@font/gilory_extra_bold"
-        android:text="Hidden Brains Intotech Pvt. Ltd."
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/pocompanystreet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="88dp"
-        android:text="Jodhpur char rasta"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/pocomapnycity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="108dp"
-        android:text="Ahmedabad"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/pocompanystate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="108dp"
-        android:text="Gujarat"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/pocompanyzipcode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="252dp"
-        android:layout_marginTop="108dp"
-        android:text="380008"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txtstyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginBottom="40dp"
-        android:fontFamily="@font/gilory_extra_bold"
-        android:text="Styles :"
-        android:textColor="#156CB1"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/etordernote"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/poproductstyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="40dp"
-        android:fontFamily="@font/gilory_extra_bold"
-        android:text="0"
-        android:textColor="#156CB1"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/etordernote"
-        app:layout_constraintStart_toEndOf="@id/txtstyle" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="40dp"
-        android:fontFamily="@font/gilory_extra_bold"
-        android:text="Total :"
-        android:textColor="#156CB1"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/etordernote"
-        app:layout_constraintEnd_toStartOf="@id/poordertotal" />
-
-    <TextView
-        android:id="@+id/poordertotal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="40dp"
-        android:fontFamily="@font/gilory_extra_bold"
-        android:text="0"
-        android:textColor="#156CB1"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/etordernote"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnplaceorder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="56dp"
-        android:background="@drawable/rounded_button"
-        android:fontFamily="@font/gilory_bold"
-        android:text="SAVE AND EMAIL PO"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            android:layout_height="80dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="44dp"
+            android:background="@drawable/edittext_border"
+            android:ems="20"
+            android:gravity="start|top"
+            android:hint="Order note"
+            android:inputType="textMultiLine"
+            app:layout_constraintBottom_toTopOf="@+id/btnplaceorder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/poproductstyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pocompanystate">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="0dp"
+                tools:listitem="@layout/add_product" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/gilory_extra_bold"
+            android:text="Order"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+        <TextView
+            android:id="@+id/pocompanyname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="64dp"
+            android:fontFamily="@font/gilory_extra_bold"
+            android:text="Hidden Brains Intotech Pvt. Ltd."
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pocompanystreet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="88dp"
+            android:text="Jodhpur char rasta"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pocomapnycity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="108dp"
+            android:text="Ahmedabad"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pocompanystate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="156dp"
+            android:layout_marginTop="108dp"
+            android:text="Gujarat"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pocompanyzipcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="252dp"
+            android:layout_marginTop="108dp"
+            android:text="380008"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtstyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/gilory_extra_bold"
+            android:text="Styles :"
+            android:textColor="#156CB1"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/etordernote"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/poproductstyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/gilory_extra_bold"
+            android:text="0"
+            android:textColor="#156CB1"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/etordernote"
+            app:layout_constraintStart_toEndOf="@id/txtstyle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/gilory_extra_bold"
+            android:text="Total :"
+            android:textColor="#156CB1"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/etordernote"
+            app:layout_constraintEnd_toStartOf="@id/poordertotal" />
+
+        <TextView
+            android:id="@+id/poordertotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/gilory_extra_bold"
+            android:text="0"
+            android:textColor="#156CB1"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/etordernote"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnplaceorder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="56dp"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/gilory_bold"
+            android:text="SAVE AND EMAIL PO"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

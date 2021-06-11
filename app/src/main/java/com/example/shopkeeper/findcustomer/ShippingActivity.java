@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,12 +43,15 @@ public class ShippingActivity extends AppCompatActivity {
     //    private List<ShippingModel> shippingModels = new ArrayList<>();
     private XShippingAdapter mAdapter;
 
+    private FindCustomerModel selectCustomerModel;
+    private ArrayList<CreateOrderModel> items;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shipping);
 
-        ArrayList<CreateOrderModel> data = (ArrayList<CreateOrderModel>) getIntent().getSerializableExtra("data");
+        items= (ArrayList<CreateOrderModel>) getIntent().getSerializableExtra("items");
 
 
         addCustomer = findViewById(R.id.btnaddcustomer);
@@ -63,7 +67,7 @@ public class ShippingActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
-               shippingSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        shippingSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 searchQuery(query);
@@ -82,6 +86,8 @@ public class ShippingActivity extends AppCompatActivity {
         mAdapter.setRecyclerViewItemClick(new EasyAdapter.OnRecyclerViewItemClick<FindCustomerModel>() {
             @Override
             public void onRecyclerViewItemClick(View view, FindCustomerModel model) {
+
+                selectCustomerModel = model;
                 shippingfragment.setVisibility(View.VISIBLE);
                 recyclerView.setVisibility(View.GONE);
 
@@ -136,10 +142,14 @@ public class ShippingActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                Intent intent = new Intent(ShippingActivity.this, PlaceOrderActivity.class);
 //                startActivity(intent);
-                FindCustomerModel model = new FindCustomerModel();
-                Intent i = new Intent(ShippingActivity.this, PlaceOrderActivity.class);
-                i.putExtra("data",model);
-                startActivity(i);
+                if (selectCustomerModel != null) {
+                    Intent i = new Intent(ShippingActivity.this, PlaceOrderActivity.class);
+                    i.putExtra("items",items);
+                    i.putExtra("customer", selectCustomerModel);
+                    startActivity(i);
+                } else {
+                    Toast.makeText(ShippingActivity.this, "Please select customer", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -170,14 +180,15 @@ public class ShippingActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFilterResult(ArrayList<FindCustomerModel> filteredList)
-            {
+            public void onFilterResult(ArrayList<FindCustomerModel> filteredList) {
                 mAdapter.clear(false);
                 mAdapter.addAll(filteredList, false);
                 mAdapter.notifyDataSetChanged();
             }
         });
     }
+
+
     public void AddShipping() {
         FindCustomerRequestEnvelope requestEnvelope = new FindCustomerRequestEnvelope();
         FindCustomerRequestBody requestBody = new FindCustomerRequestBody();
@@ -208,7 +219,6 @@ public class ShippingActivity extends AppCompatActivity {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-
     }
 
 

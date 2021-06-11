@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class ProductColorImageAPI implements Serializable {
 
+
     @SerializedName("ColorSmallImageUrl")
     @Expose
     private String colorSmallImageUrl;
