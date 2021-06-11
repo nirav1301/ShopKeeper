@@ -72,6 +72,10 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
         SendOrderRequestEnvelope requestEnvelope = new SendOrderRequestEnvelope();
         SendOrderRequestBody requestBody = new SendOrderRequestBody();
+
+        SendOrderRequestBody.SendRequestOrder requestRoot=new SendOrderRequestBody.SendRequestOrder();
+
+
         SendOrderRequestBody.RequestSendOrder requestModel = new SendOrderRequestBody.RequestSendOrder();
         requestModel.AdminId = "756";
         requestModel.CompanyId = "10015";
@@ -90,8 +94,9 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
         requestModel.ProductInfo = productInfo;
 
-        requestModel.xmlns = "http://tempuri.org/";
-        requestBody.requestSendOrder = requestModel;
+        requestRoot.xmlns = "http://tempuri.org/";
+        requestRoot.requestSendOrder=requestModel;
+        requestBody.sendOrderRoot = requestRoot;
         requestEnvelope.body = requestBody;
         Call<SendOrderResponseEnvelope> call = RetrofitGenerator.getApiService().sendorderX(requestEnvelope);
         call.enqueue(new Callback<SendOrderResponseEnvelope>() {

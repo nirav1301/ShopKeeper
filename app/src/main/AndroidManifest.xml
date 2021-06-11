@@ -3,6 +3,7 @@
     package="com.example.shopkeeper">
 
     <application
+        android:name="com.example.shopkeeper.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_icon"
         android:label="@string/app_name"

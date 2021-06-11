@@ -5,18 +5,25 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
-import java.util.List;
+import java.util.ArrayList;
 
 @Root(name = "soap:Body", strict = false)
 public class SendOrderRequestBody {
 
     @Element(name = "SendOrder", required = false)
-    public SendOrderRequestBody.RequestSendOrder requestSendOrder;
+    public SendOrderRequestBody.SendRequestOrder sendOrderRoot;
 
-    public static class RequestSendOrder {
+    public static class SendRequestOrder {
+        @Element(name = "sendOrderRequest", required = false)
+        public SendOrderRequestBody.RequestSendOrder requestSendOrder;
 
         @Attribute(name = "xmlns")
         public String xmlns;
+    }
+
+    public static class RequestSendOrder {
+
+
 
         @Element(name = "AdminId", required = false)
         public String AdminId;
@@ -42,10 +49,11 @@ public class SendOrderRequestBody {
     }
 
     public static class ProductInfo {
-        @ElementList(name = "ProductInfoAPI")
-        public List<ProductInfoAPI> productInfoAPIList;
+        @ElementList(name = "ProductInfoAPI",inline = true)
+        public ArrayList<ProductInfoAPI> productInfoAPIList;
     }
 
+    @Root(name = "ProductInfoAPI")
     public static class ProductInfoAPI {
         @Element(name = "ProductId", required = false)
         public long productId;
