@@ -11,9 +11,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.shopkeeper.Home;
+import com.example.shopkeeper.homescreen.Home;
 import com.example.shopkeeper.R;
-import com.example.shopkeeper.authentication.Login.RetrofitGenerator;
+import com.example.shopkeeper.authentication.login.RetrofitGenerator;
 import com.example.shopkeeper.sendinvoice.request.SendInvoiceRequestBody;
 import com.example.shopkeeper.sendinvoice.request.SendInvoiceRequestEnvelope;
 import com.example.shopkeeper.sendinvoice.response.SendInvoiceResponseEnvelope;

@@ -10,12 +10,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.shopkeeper.authentication.Login.Request.LoginRequestBody;
-import com.example.shopkeeper.authentication.Login.Request.LoginRequestEnvelope;
-import com.example.shopkeeper.authentication.Login.Response.LoginResponseEnvelope;
-import com.example.shopkeeper.authentication.Login.Response.UserLoginResponse;
-import com.example.shopkeeper.authentication.Login.RetrofitGenerator;
-import com.example.shopkeeper.Home;
+import com.example.shopkeeper.authentication.login.request.LoginRequestBody;
+import com.example.shopkeeper.authentication.login.request.LoginRequestEnvelope;
+import com.example.shopkeeper.authentication.login.response.LoginResponseEnvelope;
+import com.example.shopkeeper.authentication.login.response.UserLoginResponse;
+import com.example.shopkeeper.authentication.login.RetrofitGenerator;
+import com.example.shopkeeper.homescreen.Home;
 import com.example.shopkeeper.R;
 import com.example.shopkeeper.forgotpassword.ForgotPasswordActivity;
 import com.google.gson.Gson;

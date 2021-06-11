@@ -12,11 +12,11 @@
         android:theme="@style/Theme.ShopKeeper">
         <activity android:name=".sendinvoice.SendInvoiceActivity"
             android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".Home"
+        <activity android:name=".homescreen.Home"
             android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".forgotpassword.ForgotPasswordActivity"
             android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".Order.AddCustomer"
+        <activity android:name=".addcustomer.AddCustomerActivity"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".sendorder.PlaceOrderActivity"
             android:windowSoftInputMode="adjustPan"/>
@@ -30,7 +30,7 @@
             android:name=".HomeScreen.HomeScreenActivity"
             android:windowSoftInputMode="adjustResize"
             android:label="Home Page" />
-        <activity android:name=".SplashScreen.SplashScreen">
+        <activity android:name=".splashscreen.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

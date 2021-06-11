@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.shopkeeper.R;
-import com.example.shopkeeper.authentication.Login.RetrofitGenerator;
+import com.example.shopkeeper.authentication.login.RetrofitGenerator;
 import com.example.shopkeeper.authentication.MainActivity;
 import com.example.shopkeeper.forgotpassword.request.ForgotPassEmailRequestBody;
 import com.example.shopkeeper.forgotpassword.request.ForgotPassRequestEnvelope;

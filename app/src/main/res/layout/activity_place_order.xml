@@ -36,6 +36,7 @@
             app:layout_constraintTop_toBottomOf="@+id/pocompanystate">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvplaceorder"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"

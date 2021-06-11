@@ -20,15 +20,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dc.codescanner.CodeScannerActivity;
 import com.dc.codescanner.CodeScannerConfig;
 import com.dc.codescanner.controls.ScannerResult;
-import com.example.shopkeeper.authentication.Login.RetrofitGenerator;
+import com.example.shopkeeper.authentication.login.RetrofitGenerator;
 import com.example.shopkeeper.createorder.CreateOrderModel;
 import com.example.shopkeeper.createorder.CreateOrderResponse;
-import com.example.shopkeeper.createorder.Request.CreateOrderRequestBody;
-import com.example.shopkeeper.createorder.Request.CreateOrderRequestEnvelope;
-import com.example.shopkeeper.createorder.Response.CreateOrderResponseEnvelope;
+import com.example.shopkeeper.createorder.request.CreateOrderRequestBody;
+import com.example.shopkeeper.createorder.request.CreateOrderRequestEnvelope;
+import com.example.shopkeeper.createorder.response.CreateOrderResponseEnvelope;
 import com.example.shopkeeper.createorder.XAddProductAdapter;
 import com.example.shopkeeper.databinding.FragmentScannerFragmentBinding;
 import com.example.shopkeeper.findcustomer.ShippingActivity;
+import com.example.shopkeeper.recentorder.RecentOrderFragment;
 import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
@@ -113,7 +114,7 @@ public class ScannerFragment extends Fragment {
         binding.imgbtnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Home_fragment fragment = new Home_fragment();
+                RecentOrderFragment fragment = new RecentOrderFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, fragment);

@@ -16,5 +16,6 @@ public class XSendInvoiceAdapter extends EasyAdapter<CreateOrderModel, ItemOrder
     public void onBind(@NonNull ItemOrderDetailBinding itemOrderDetailBinding, @NonNull CreateOrderModel createOrderModel) {
 
 
+
     }
 }
