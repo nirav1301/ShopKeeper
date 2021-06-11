@@ -1,9 +1,9 @@
 package com.example.shopkeeper.sendorder;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,10 +17,11 @@ import com.example.shopkeeper.authentication.login.RetrofitGenerator;
 import com.example.shopkeeper.createorder.CreateOrderModel;
 import com.example.shopkeeper.databinding.ActivityPlaceOrderBinding;
 import com.example.shopkeeper.findcustomer.FindCustomerModel;
-import com.example.shopkeeper.sendinvoice.SendInvoiceActivity;
+import com.example.shopkeeper.orderhistory.OrderHistoryFragment;
 import com.example.shopkeeper.sendorder.request.SendOrderRequestBody;
 import com.example.shopkeeper.sendorder.request.SendOrderRequestEnvelope;
 import com.example.shopkeeper.sendorder.response.SendOrderResponseEnvelope;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -58,24 +59,16 @@ public class PlaceOrderActivity extends AppCompatActivity {
         binding.btnplaceorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // sendOrder();
-                AlertDialog alertDialog = new AlertDialog.Builder(PlaceOrderActivity.this).create();
-                alertDialog.setTitle("Alert");
-                alertDialog.setMessage("Good Job");
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent i = new Intent(PlaceOrderActivity.this, SendInvoiceActivity.class);
-                                startActivity(i);
-                                dialog.dismiss();
-                            }
-                        });
-                alertDialog.show();
+                sendOrder();
+
             }
         });
     }
 
     public void sendOrder() {
+        SendOrderRequestBody.ProductInfo productInfo = new SendOrderRequestBody.ProductInfo();
+        productInfo.productInfoAPIList = new ArrayList<>();
+
 
         SendOrderRequestEnvelope requestEnvelope = new SendOrderRequestEnvelope();
         SendOrderRequestBody requestBody = new SendOrderRequestBody();
@@ -85,17 +78,13 @@ public class PlaceOrderActivity extends AppCompatActivity {
         requestModel.CustomerId = String.valueOf(customerModel.getCompanyCustomerID());
         requestModel.OrderNote = binding.etordernote.getText().toString();
         requestModel.ProductStyle = "2";
-        requestModel.CompanyWebsite = "";
-
-        SendOrderRequestBody.ProductInfo productInfo = new SendOrderRequestBody.ProductInfo();
-        productInfo.productInfoAPIList = new ArrayList<>();
-
+        requestModel.CompanyWebsite = "http://www.shkang.biz";
 
         for (CreateOrderModel createOrderModel : items) {
             SendOrderRequestBody.ProductInfoAPI productInfoAPI = new SendOrderRequestBody.ProductInfoAPI();
-            productInfoAPI.colorId = createOrderModel.getColorID();
             productInfoAPI.productId = createOrderModel.getProductID();
-            productInfoAPI.quantity = 1;
+            productInfoAPI.colorId = createOrderModel.getColorID();
+            productInfoAPI.quantity = 5;
             productInfo.productInfoAPIList.add(productInfoAPI);
         }
 
@@ -108,6 +97,31 @@ public class PlaceOrderActivity extends AppCompatActivity {
         call.enqueue(new Callback<SendOrderResponseEnvelope>() {
             @Override
             public void onResponse(Call<SendOrderResponseEnvelope> call, Response<SendOrderResponseEnvelope> response) {
+                Gson gson = new Gson();
+                SendOrderResponse sendOrderResponse = gson.fromJson(response.body().body.
+                        sendOrderResponseModel.SendOrderResult, SendOrderResponse.class);
+                if (sendOrderResponse.getSetting().isSuccess() == true) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(PlaceOrderActivity.this).create();
+                    alertDialog.setTitle("Alert");
+                    alertDialog.setMessage("Good Job");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+//                                    Intent i = new Intent(PlaceOrderActivity.this, SendInvoiceActivity.class);
+//                                    startActivity(i);
+                                    OrderHistoryFragment fragment = new OrderHistoryFragment();
+                                    getSupportFragmentManager()
+                                            .beginTransaction()
+                                            .replace(R.id.fragment_container, fragment)
+                                            .commit();
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                }
+                else{
+                    Toast.makeText(PlaceOrderActivity.this, "Order Request Failed", Toast.LENGTH_SHORT).show();
+                }
 
 
             }

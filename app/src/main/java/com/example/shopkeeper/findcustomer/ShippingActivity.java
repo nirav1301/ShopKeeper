@@ -194,7 +194,7 @@ public class ShippingActivity extends AppCompatActivity {
         FindCustomerRequestBody requestBody = new FindCustomerRequestBody();
         FindCustomerRequestBody.RequestFindCustomer requestModel = new FindCustomerRequestBody.RequestFindCustomer();
         requestModel.searchtext = shippingSearch.getQuery().toString();
-        requestModel.companyId = "10004";
+        requestModel.companyId = "10015";
         requestModel.xmlns = "http://tempuri.org/";
         requestBody.requestFindCustomer = requestModel;
         requestEnvelope.body = requestBody;
