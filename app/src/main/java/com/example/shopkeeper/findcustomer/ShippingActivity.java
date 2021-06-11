@@ -85,6 +85,7 @@ public class ShippingActivity extends AppCompatActivity {
                 shippingfragment.setVisibility(View.VISIBLE);
                 recyclerView.setVisibility(View.GONE);
 
+
                 ShippingFragment shippingFragment = new ShippingFragment();
 
                 Bundle bundle = new Bundle();
@@ -133,12 +134,12 @@ public class ShippingActivity extends AppCompatActivity {
         btngotoPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ShippingActivity.this, PlaceOrderActivity.class);
-                startActivity(intent);
-//                ArrayList<FindCustomerModel> data = (ArrayList<FindCustomerModel>) getIntent().getSerializableExtra("data");
-//                     Intent intent=new Intent(ShippingActivity.this, PlaceOrderActivity.class);
-//                        intent.putExtra("data",data);
-//                          startActivity(intent);
+//                Intent intent = new Intent(ShippingActivity.this, PlaceOrderActivity.class);
+//                startActivity(intent);
+                FindCustomerModel model = new FindCustomerModel();
+                Intent i = new Intent(ShippingActivity.this, PlaceOrderActivity.class);
+                i.putExtra("data",model);
+                startActivity(i);
 
             }
         });

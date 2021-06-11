@@ -81,6 +81,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/odorderstatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="96dp"
@@ -101,7 +102,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/odordercomment"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginLeft="30dp"
@@ -115,7 +116,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/etodemail"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="30dp"
@@ -124,7 +125,7 @@
             android:background="@drawable/edittext_border"
             android:fitsSystemWindows="true"
             android:hint="xyz@gmail.com"
-            app:layout_constraintBottom_toTopOf="@+id/editText3"
+            app:layout_constraintBottom_toTopOf="@+id/odordercomment"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -140,6 +141,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/odcompanystreet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -191,7 +193,7 @@
             android:text="Email PO"
             android:layout_marginBottom="5dp"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/editText"
+            app:layout_constraintBottom_toTopOf="@+id/etodemail"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -229,7 +231,7 @@
             android:text="Total:"
             android:textColor="#156CB1"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/editText"
+            app:layout_constraintBottom_toTopOf="@+id/etodemail"
             app:layout_constraintEnd_toStartOf="@+id/odordertotal" />
 
         <TextView
@@ -239,14 +241,14 @@
             android:layout_marginEnd="36dp"
             android:layout_marginBottom="52dp"
             android:fontFamily="@font/gilory_extra_bold"
-            android:text="39485"
+            android:text=""
             android:textColor="#156CB1"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/editText"
+            app:layout_constraintBottom_toTopOf="@+id/etodemail"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/rvorderdetail"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_marginTop="88dp"

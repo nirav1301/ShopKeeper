@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -31,6 +32,9 @@ public class PlaceOrderActivity extends AppCompatActivity {
     private TextView pocompanycity;
     private TextView pocompanystate;
     private TextView pocompanyzipcode;
+    private TextView poproductstyle;
+    private TextView poproducttotal;
+    private EditText etordernote;
 
 
     @Override
@@ -43,14 +47,17 @@ public class PlaceOrderActivity extends AppCompatActivity {
         pocompanycity = findViewById(R.id.pocomapnycity);
         pocompanystate = findViewById(R.id.pocompanystate);
         pocompanyzipcode = findViewById(R.id.pocompanyzipcode);
+        etordernote = findViewById(R.id.etordernote);
+        poproductstyle = findViewById(R.id.poproductstyle);
+        poproducttotal = findViewById(R.id.poordertotal);
 
         findCustomerModel = (FindCustomerModel) getIntent().getSerializableExtra("data");
         CreateOrderModel createOrderModel = (CreateOrderModel) getIntent().getSerializableExtra("abcd");
-//        pocompanyname.setText(findCustomerModel.getCustomerCompanyName());
-//        pocompanystreet.setText(findCustomerModel.getShippingStreet());
-//        pocompanycity.setText(findCustomerModel.getShippingCity());
-//        pocompanystate.setText(findCustomerModel.getShippingStateOrProvince());
-//        pocompanyzipcode.setText(findCustomerModel.getShippingZipcode());
+        pocompanyname.setText(findCustomerModel.getCustomerCompanyName());
+        pocompanystreet.setText(findCustomerModel.getShippingStreet());
+        pocompanycity.setText(findCustomerModel.getShippingCity());
+        pocompanystate.setText(findCustomerModel.getShippingStateOrProvince());
+        pocompanyzipcode.setText(findCustomerModel.getShippingZipcode());
 
         btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +86,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
         requestModel.AdminId = "756";
         requestModel.CompanyId = "";
         requestModel.CustomerId = "";
-        requestModel.OrderNote = "";
+        requestModel.OrderNote = etordernote.getText().toString();
         requestModel.ProductStyle = "";
         requestModel.CompanyWebsite = "";
         requestModel.ProductInfo = "";
