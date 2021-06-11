@@ -1,11 +1,11 @@
 package com.example.shopkeeper;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
-import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.example.shopkeeper.orderhistory.OrderHistoryFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,7 +21,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         navigation.setOnNavigationItemSelectedListener(this);
 
     }
-    private boolean loadFragment(Fragment fragment) {
+    public boolean loadFragment(Fragment fragment) {
         //switching fragment
         if (fragment != null) {
             getSupportFragmentManager()

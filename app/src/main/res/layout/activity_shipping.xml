@@ -39,7 +39,7 @@
                 android:layout_height="match_parent">
 
                 <SearchView
-                    android:id="@+id/menu_search"
+                    android:id="@+id/shippingsearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -54,15 +54,17 @@
                     android:name="com.example.shopkeeper.findcustomer.ShippingFragment"
                     android:layout_width="match_parent"
                     android:layout_height="490dp"
-                    android:layout_below="@id/menu_search"
+                    android:layout_below="@id/shippingsearch"
                     android:layout_marginTop="10dp"
-                    tools:layout="@layout/fragment_shipping" />
+                    >
+
+                </FrameLayout>
 
                 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                     android:id="@+id/swipeforrefshipping"
                     android:layout_width="match_parent"
                     android:layout_height="490dp"
-                    android:layout_below="@+id/menu_search"
+                    android:layout_below="@+id/shippingsearch"
                     android:layout_marginTop="10dp">
 
                     <androidx.recyclerview.widget.RecyclerView

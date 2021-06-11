@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,6 +56,7 @@ public class ScannerFragment extends Fragment {
                 switch (view.getId()) {
                     case R.id.imgbtndelete:
                         mAdapter.remove(model);
+                        binding.coproductstyle.setText(String.valueOf(mAdapter.getItemCount()));
                         break;
                 }
             }
@@ -69,13 +73,31 @@ public class ScannerFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        binding.coproductstyle.setText(String.valueOf(mAdapter.getItemCount()));
         binding.imgbtnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), ShippingActivity.class);
-                i.putExtra("data", mAdapter.getData());
-                startActivity(i);
-                ((Activity) getActivity()).overridePendingTransition(0, 0);
+//                if (mAdapter.getItemCount() <= 0){
+//                    AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+//                    builder1.setTitle("Warning");
+//                    builder1.setMessage("Please add any item");
+//                    builder1.setCancelable(true);
+//                    builder1.setNeutralButton(android.R.string.ok,
+//                            new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialog, int id) {
+//                                    dialog.cancel();
+//                                }
+//                            });
+//
+//                    AlertDialog alert11 = builder1.create();
+//                    alert11.show();
+//                }
+
+                    Intent i = new Intent(getActivity(), ShippingActivity.class);
+                    i.putExtra("data", mAdapter.getData());
+                    startActivity(i);
+                    ((Activity) getActivity()).overridePendingTransition(0, 0);
+
             }
         });
         binding.imageButton2.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +113,13 @@ public class ScannerFragment extends Fragment {
         binding.imgbtnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Home_fragment fragment = new Home_fragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
 
             }
         });
@@ -107,6 +136,7 @@ public class ScannerFragment extends Fragment {
         if (requestCode == 789) {
             if (resultCode == Activity.RESULT_OK) {
                 ScannerResult scannerResult = data.getParcelableExtra((CodeScannerActivity.Companion.getRESULT_KEY()));
+                Toast.makeText(getActivity(),scannerResult.getResult(), Toast.LENGTH_SHORT).show();
                 myResult = scannerResult.getResult();
                 pCode = myResult.substring(0, 6);
                 cCode = myResult.substring(7);
@@ -119,10 +149,10 @@ public class ScannerFragment extends Fragment {
         CreateOrderRequestEnvelope requestEnvelope = new CreateOrderRequestEnvelope();
         CreateOrderRequestBody requestBody = new CreateOrderRequestBody();
         CreateOrderRequestBody.RequestCreateOrder requestModel = new CreateOrderRequestBody.RequestCreateOrder();
-        requestModel.companyId = "10004";
+        requestModel.companyId = "10015";
         requestModel.productId = pCode;
         requestModel.colorId = cCode;
-        requestModel.userId = "740";
+        requestModel.userId = "756";
         requestModel.xmlns = "http://tempuri.org/";
         requestBody.requestCreateOrder = requestModel;
         requestEnvelope.body = requestBody;
@@ -137,6 +167,7 @@ public class ScannerFragment extends Fragment {
                 if (createOrderResponse.getSetting().getSuccess() == true) {
                     /*mAdapter.clear(false);*/
                     mAdapter.addAll(createOrderResponse.getData(), false);
+                    binding.coproductstyle.setText(String.valueOf(mAdapter.getItemCount()));
                     mAdapter.notifyDataSetChanged();
 
 
@@ -154,4 +185,5 @@ public class ScannerFragment extends Fragment {
             }
         });
     }
+
 }

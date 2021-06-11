@@ -99,11 +99,11 @@ public class OrderHistoryFragment extends Fragment {
         mAdapter.performFilter(keyword, new EasyAdapter.OnFilter<OrderHistoryModel>() {
             @Override
             public boolean onFilterApply(@Nullable Object keyword, @NonNull OrderHistoryModel model) {
-                if (keyword.toString().equalsIgnoreCase(String.valueOf(model.getInventoryOrderID()))) {
+                if (String.valueOf(model.getInventoryOrderID()).toLowerCase().contains(keyword.toString().toLowerCase())) {
                     return true;
                 }
 
-                if (keyword.toString().equalsIgnoreCase(String.valueOf(model.getCompanyName()))) {
+                if (String.valueOf(model.getCompanyName()).toLowerCase().contains(keyword.toString().toLowerCase())) {
                     return true;
                 }
 
@@ -111,7 +111,8 @@ public class OrderHistoryFragment extends Fragment {
             }
 
             @Override
-            public void onFilterResult(ArrayList<OrderHistoryModel> filteredList) {
+            public void onFilterResult(ArrayList<OrderHistoryModel> filteredList)
+            {
                 mAdapter.clear(false);
                 mAdapter.addAll(filteredList, false);
                 mAdapter.notifyDataSetChanged();
@@ -123,11 +124,11 @@ public class OrderHistoryFragment extends Fragment {
         OrderHistoryRequestEnvelope requestEnvelope = new OrderHistoryRequestEnvelope();
         OrderHistoryRequestBody requestBody = new OrderHistoryRequestBody();
         OrderHistoryRequestBody.RequestOrderHistory requestModel = new OrderHistoryRequestBody.RequestOrderHistory();
-        requestModel.companyId = "10004";
+        requestModel.companyId = "10015";
         requestModel.pageNum = "1";
         requestModel.recordPerPage = "10";
         requestModel.orderId = "64188";
-        requestModel.userId = "740";
+        requestModel.userId = "756";
         requestModel.searchtext = demo;
         requestModel.xmlns = "http://tempuri.org/";
         requestBody.requestOrderHistory = requestModel;
@@ -142,8 +143,8 @@ public class OrderHistoryFragment extends Fragment {
                 OrderHistoryResponse orderHistoryResponse = gson.fromJson(response.body().body.
                         orderHistoryResponseModel.GetOrderHistryResult, OrderHistoryResponse.class);
                 if (orderHistoryResponse.getSetting().getSuccess()) {
-                    mAdapter.clear(false);
-                    mAdapter.addAll(orderHistoryResponse.getData(), false);
+                    mAdapter.clear(true);
+                    mAdapter.addAll(orderHistoryResponse.getData(), true);
                     mAdapter.notifyDataSetChanged();
                 }
             }

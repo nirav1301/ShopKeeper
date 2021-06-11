@@ -21,7 +21,7 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 public class RetrofitGenerator {
 
 //    http://ms.projectspreview.net:2001/myservice.asmx
-    public final static String BASE_URL = "http://ms.projectspreview.net:2001/";
+    public final static String BASE_URL = "https://www.propergandhi.com/";
 
     public static ApiService apiService;
 

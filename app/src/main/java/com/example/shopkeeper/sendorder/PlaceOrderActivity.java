@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.shopkeeper.R;
 import com.example.shopkeeper.authentication.Login.RetrofitGenerator;
 import com.example.shopkeeper.createorder.CreateOrderModel;
+import com.example.shopkeeper.findcustomer.FindCustomerModel;
 import com.example.shopkeeper.sendinvoice.SendInvoiceActivity;
 import com.example.shopkeeper.sendorder.request.SendOrderRequestBody;
 import com.example.shopkeeper.sendorder.request.SendOrderRequestEnvelope;
@@ -23,13 +25,33 @@ import retrofit2.Response;
 
 public class PlaceOrderActivity extends AppCompatActivity {
     private Button btnPlaceOrder;
+    private FindCustomerModel findCustomerModel;
+    private TextView pocompanyname;
+    private TextView pocompanystreet;
+    private TextView pocompanycity;
+    private TextView pocompanystate;
+    private TextView pocompanyzipcode;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_order);
         btnPlaceOrder = findViewById(R.id.btnplaceorder);
+        pocompanyname = findViewById(R.id.pocompanyname);
+        pocompanystreet = findViewById(R.id.pocompanystreet);
+        pocompanycity = findViewById(R.id.pocomapnycity);
+        pocompanystate = findViewById(R.id.pocompanystate);
+        pocompanyzipcode = findViewById(R.id.pocompanyzipcode);
+        pocompanyname.setText(findCustomerModel.getCustomerCompanyName());
+        pocompanystreet.setText(findCustomerModel.getShippingStreet());
+        pocompanycity.setText(findCustomerModel.getShippingCity());
+        pocompanystate.setText(findCustomerModel.getShippingStateOrProvince());
+        pocompanyzipcode.setText(findCustomerModel.getShippingZipcode());
+
+        findCustomerModel = (FindCustomerModel) getIntent().getSerializableExtra("model");
         CreateOrderModel createOrderModel = (CreateOrderModel) getIntent().getSerializableExtra("abcd");
+
         btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,7 +76,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
         SendOrderRequestEnvelope requestEnvelope = new SendOrderRequestEnvelope();
         SendOrderRequestBody requestBody = new SendOrderRequestBody();
         SendOrderRequestBody.RequestSendOrder requestModel = new SendOrderRequestBody.RequestSendOrder();
-        requestModel.AdminId = "";
+        requestModel.AdminId = "756";
         requestModel.CompanyId = "";
         requestModel.CustomerId = "";
         requestModel.OrderNote = "";

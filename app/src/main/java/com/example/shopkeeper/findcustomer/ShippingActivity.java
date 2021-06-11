@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,7 +37,7 @@ public class ShippingActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private Button btngotoPlaceOrder;
     private Button addCustomer;
-    private SearchView shipping_search;
+    private SearchView shippingSearch;
     private View shippingfragment;
     //    private List<ShippingModel> shippingModels = new ArrayList<>();
     private XShippingAdapter mAdapter;
@@ -52,20 +54,36 @@ public class ShippingActivity extends AppCompatActivity {
         btngotoPlaceOrder = findViewById(R.id.btngotoplaceorder);
 //        bottomNavigationView = findViewById(R.id.bottom_navigation);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        shipping_search = findViewById(R.id.menu_search);
+        shippingSearch = findViewById(R.id.shippingsearch);
         swipeRefreshLayout = findViewById(R.id.swipeforrefshipping);
         shippingfragment = findViewById(R.id.ShippingFragment);
+        shippingfragment.setVisibility(View.GONE);
         mAdapter = new XShippingAdapter();
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
+               shippingSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchQuery(query);
+                AddShipping();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchQuery(newText);
+                AddShipping();
+                return false;
+            }
+        });
         AddShipping();
         mAdapter.setRecyclerViewItemClick(new EasyAdapter.OnRecyclerViewItemClick<FindCustomerModel>() {
             @Override
             public void onRecyclerViewItemClick(View view, FindCustomerModel model) {
-
                 shippingfragment.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
 
                 ShippingFragment shippingFragment = new ShippingFragment();
 
@@ -77,9 +95,10 @@ public class ShippingActivity extends AppCompatActivity {
                         .beginTransaction()
                         .replace(R.id.ShippingFragment, shippingFragment)
                         .commit();
-                recyclerView.setVisibility(View.GONE);
+
             }
         });
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -129,39 +148,36 @@ public class ShippingActivity extends AppCompatActivity {
 
     }
 
-    //    private void shippingList() {
-//        ShippingModel shippingModel = new ShippingModel("Hidden Brains infotech pvt ltd","Nirav",
-//                "Vasava","Jodhpur Char rasta","Ahmedabad","Gujarat","380008",
-//                "India","9090946464","hiddenbrains@hotmail.com");
-//        shippingModels.add(shippingModel);
-//        shippingModel = new ShippingModel("Seven Seas infotech pvt. ltd.","Krupal",
-//                "Mehta","Jodhpur Char rasta","Ahmedabad","Gujarat","380010",
-//                "India","9090946464","hiddenbrains@hotmail.com");
-//        shippingModels.add(shippingModel);
-//        shippingModel = new ShippingModel("Kaizen infocomm pvt. ltd.","Mukul",
-//                "Vasava","Jodhpur Char rasta","Ahmedabad","Gujarat","380020",
-//                "India","9090946464","hiddenbrains@hotmail.com");
-//        shippingModels.add(shippingModel);
-//        shippingModel = new ShippingModel("Hidden Brains infotech pvt ltd","Nirav",
-//                "Vasava","Jodhpur Char rasta","Ahmedabad","Gujarat","380008",
-//                "India","9090946464","hiddenbrains@hotmail.com");
-//        shippingModels.add(shippingModel);
-//        shippingModel = new ShippingModel("Seven seas infotech pvt. ltd.","Krupal",
-//                "Mehta","Jodhpur Char rasta","Ahmedabad","Gujarat","380010",
-//                "India","9090946464","hiddenbrains@hotmail.com");
-//        shippingModels.add(shippingModel);
-//        shippingModel = new ShippingModel("Kaizen infocomm pvt. ltd.","Mukul",
-//                "Vasava","Jodhpur Char rasta","Ahmedabad","Gujarat","380020",
-//                "India","9090946464","hiddenbrains@hotmail.com");
-//        shippingModels.add(shippingModel);
-//
-//    }
-//
+
+    private void searchQuery(String keyword) {
+        mAdapter.performFilter(keyword, new EasyAdapter.OnFilter<FindCustomerModel>() {
+            @Override
+            public boolean onFilterApply(@Nullable Object keyword, @NonNull FindCustomerModel model) {
+                if (String.valueOf(model.getCustomerName()).toLowerCase().contains(keyword.toString().toLowerCase())) {
+                    return true;
+                }
+
+                if (String.valueOf(model.getCustomerCompanyName()).toLowerCase().contains(keyword.toString().toLowerCase())) {
+                    return true;
+                }
+
+                return false;
+            }
+
+            @Override
+            public void onFilterResult(ArrayList<FindCustomerModel> filteredList)
+            {
+                mAdapter.clear(false);
+                mAdapter.addAll(filteredList, false);
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+    }
     public void AddShipping() {
         FindCustomerRequestEnvelope requestEnvelope = new FindCustomerRequestEnvelope();
         FindCustomerRequestBody requestBody = new FindCustomerRequestBody();
         FindCustomerRequestBody.RequestFindCustomer requestModel = new FindCustomerRequestBody.RequestFindCustomer();
-        requestModel.searchtext = "L";
+        requestModel.searchtext = shippingSearch.getQuery().toString();
         requestModel.companyId = "10004";
         requestModel.xmlns = "http://tempuri.org/";
         requestBody.requestFindCustomer = requestModel;
@@ -175,8 +191,8 @@ public class ShippingActivity extends AppCompatActivity {
                 FindCustomerResponse findCustomerResponse = gson.fromJson(response.body().
                         body.findCustomerReponseModel.FindCustomerResult, FindCustomerResponse.class);
                 if (findCustomerResponse.getSetting().getSuccess()) {
-                    mAdapter.clear(false);
-                    mAdapter.addAll(findCustomerResponse.getData(), false);
+                    mAdapter.clear(true);
+                    mAdapter.addAll(findCustomerResponse.getData(), true);
                     mAdapter.notifyDataSetChanged();
 
                 }
