@@ -41,20 +41,20 @@ public class SendOrderRequestBody {
 
     }
 
-    public class ProductInfo {
+    public static class ProductInfo {
         @ElementList(name = "ProductInfoAPI")
-        List<ProductInfoAPI> productInfoAPIList;
+        public List<ProductInfoAPI> productInfoAPIList;
     }
 
-    public class ProductInfoAPI {
+    public static class ProductInfoAPI {
         @Element(name = "ProductId", required = false)
-        String productId;
+        public long productId;
 
         @Element(name = "ColorId", required = false)
-        String colorId;
+        public int colorId;
 
         @Element(name = "Quantity", required = false)
-        String quantity;
+        public double quantity;
     }
 }
 

@@ -1,6 +1,6 @@
 package com.example.shopkeeper.findcustomer;
 
-import com.example.shopkeeper.authentication.Login.Response.Setting;
+import com.example.shopkeeper.authentication.login.response.Setting;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

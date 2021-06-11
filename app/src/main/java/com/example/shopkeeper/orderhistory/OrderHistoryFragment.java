@@ -16,10 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.shopkeeper.R;
-import com.example.shopkeeper.authentication.Login.RetrofitGenerator;
-import com.example.shopkeeper.orderhistory.Request.OrderHistoryRequestBody;
-import com.example.shopkeeper.orderhistory.Request.OrderHistoryRequestEnvelope;
-import com.example.shopkeeper.orderhistory.Response.OrderHistoryResponseEnvelope;
+import com.example.shopkeeper.authentication.login.RetrofitGenerator;
+import com.example.shopkeeper.orderhistory.request.OrderHistoryRequestBody;
+import com.example.shopkeeper.orderhistory.request.OrderHistoryRequestEnvelope;
+import com.example.shopkeeper.orderhistory.response.OrderHistoryResponseEnvelope;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;

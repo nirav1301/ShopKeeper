@@ -15,13 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.shopkeeper.Order.AddCustomer;
+import com.example.shopkeeper.addcustomer.AddCustomerActivity;
 import com.example.shopkeeper.R;
-import com.example.shopkeeper.authentication.Login.RetrofitGenerator;
+import com.example.shopkeeper.authentication.login.RetrofitGenerator;
 import com.example.shopkeeper.createorder.CreateOrderModel;
-import com.example.shopkeeper.findcustomer.Request.FindCustomerRequestBody;
-import com.example.shopkeeper.findcustomer.Request.FindCustomerRequestEnvelope;
-import com.example.shopkeeper.findcustomer.Response.FindCustomerResponseEnvelope;
+import com.example.shopkeeper.findcustomer.request.FindCustomerRequestBody;
+import com.example.shopkeeper.findcustomer.request.FindCustomerRequestEnvelope;
+import com.example.shopkeeper.findcustomer.response.FindCustomerResponseEnvelope;
 import com.example.shopkeeper.sendorder.PlaceOrderActivity;
 import com.google.gson.Gson;
 
@@ -156,7 +156,7 @@ public class ShippingActivity extends AppCompatActivity {
         addCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ShippingActivity.this, AddCustomer.class);
+                Intent intent = new Intent(ShippingActivity.this, AddCustomerActivity.class);
                 startActivity(intent);
             }
         });
