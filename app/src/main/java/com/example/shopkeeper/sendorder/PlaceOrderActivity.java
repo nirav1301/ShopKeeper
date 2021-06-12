@@ -13,12 +13,12 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.shopkeeper.OrderHistoryActivity;
 import com.example.shopkeeper.R;
 import com.example.shopkeeper.authentication.login.RetrofitGenerator;
 import com.example.shopkeeper.createorder.CreateOrderModel;
 import com.example.shopkeeper.databinding.ActivityPlaceOrderBinding;
 import com.example.shopkeeper.findcustomer.FindCustomerModel;
-import com.example.shopkeeper.homescreen.HomeActivity;
 import com.example.shopkeeper.sendorder.request.SendOrderRequestBody;
 import com.example.shopkeeper.sendorder.request.SendOrderRequestEnvelope;
 import com.example.shopkeeper.sendorder.response.SendOrderResponseEnvelope;
@@ -60,7 +60,11 @@ public class PlaceOrderActivity extends AppCompatActivity {
         binding.btnplaceorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               sendOrder();
+//               sendOrder();
+                Intent i = new Intent(PlaceOrderActivity.this, OrderHistoryActivity.class);
+                i.putExtra("items",items);
+                i.putExtra("customer",customerModel);
+                startActivity(i);
 
             }
         });
@@ -115,7 +119,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
 //                                    Intent i = new Intent(PlaceOrderActivity.this, SendInvoiceActivity.class);
 //                                    startActivity(i);
-                                    Intent i = new Intent(PlaceOrderActivity.this, HomeActivity.class);
+                                    Intent i = new Intent(PlaceOrderActivity.this, OrderHistoryActivity.class);
                                     i.putExtra("items",items);
                                     i.putExtra("customer",customerModel);
                                     startActivity(i);

@@ -48,12 +48,12 @@ public class SendInvoiceActivity extends AppCompatActivity {
     private XSendInvoiceAdapter mAdapter;
     private ArrayList<CreateOrderModel> items;
     private FindCustomerModel customerModel;
-    private OrderHistoryModel selectOrderDetail;
+    private OrderHistoryModel selectOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order__details_);
+        setContentView(R.layout.activity_order_details_);
         btnsendInvoice = findViewById(R.id.btnsendinvoice);
         odorderid = findViewById(R.id.odorderid);
         odordertime = findViewById(R.id.odordertime);
@@ -68,21 +68,21 @@ public class SendInvoiceActivity extends AppCompatActivity {
         etorderemail = findViewById(R.id.etodemail);
         etordercomment = findViewById(R.id.odordercomment);
         rvorderdetail = findViewById(R.id.rvorderdetail);
-        odorderid.setText(selectOrderDetail.getInventoryOrderID());
-        odordertime.setText(selectOrderDetail.getOrderDateTime());
-        odorderstatus.setText(selectOrderDetail.getOrderStatus());
+        odorderid.setText(selectOrder.getInventoryOrderID());
+        odordertime.setText(selectOrder.getOrderDateTime());
+        odorderstatus.setText(selectOrder.getOrderStatus());
         odcompanyname.setText(customerModel.getCustomerCompanyName());
         odcompanystreet.setText(customerModel.getShippingStreet());
         odcompanycity.setText(customerModel.getShippingCity());
         odcompanystate.setText(customerModel.getShippingStateOrProvince());
         odcompanyzicode.setText(customerModel.getShippingZipcode());
         odorderstyle.setText(String.valueOf(mAdapter.getItemCount()));
-        odordertotal.setText(String.valueOf(selectOrderDetail.getTotalOrderAmount()));
+        odordertotal.setText(String.valueOf(selectOrder.getTotalOrderAmount()));
         etorderemail.setText(customerModel.getLoginID());
 
         items = (ArrayList<CreateOrderModel>) getIntent().getSerializableExtra("items");
         customerModel = (FindCustomerModel) getIntent().getSerializableExtra("customer");
-        selectOrderDetail = (OrderHistoryModel) getIntent().getSerializableExtra("model");
+        selectOrder = (OrderHistoryModel) getIntent().getSerializableExtra("selectorder");
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         rvorderdetail.setLayoutManager(mLayoutManager);
         rvorderdetail.setItemAnimator(new DefaultItemAnimator());
@@ -112,7 +112,7 @@ public class SendInvoiceActivity extends AppCompatActivity {
         SendInvoiceRequestBody.RequestSendInvoice requestModel = new SendInvoiceRequestBody.RequestSendInvoice();
         requestModel.adminId = "756";
         requestModel.companyId= "10015";
-        requestModel.inventoryOrderId = String.valueOf(selectOrderDetail.getInventoryOrderID());
+        requestModel.inventoryOrderId = String.valueOf(selectOrder.getInventoryOrderID());
         requestModel.productStyle="2";
         requestModel.email = customerModel.getLoginID();
         requestModel.comment =etordercomment.getText().toString();
