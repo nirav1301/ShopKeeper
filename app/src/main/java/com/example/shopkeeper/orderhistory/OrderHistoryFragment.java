@@ -1,10 +1,11 @@
 package com.example.shopkeeper.orderhistory;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,12 +18,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.shopkeeper.R;
 import com.example.shopkeeper.authentication.login.RetrofitGenerator;
+import com.example.shopkeeper.createorder.CreateOrderModel;
+import com.example.shopkeeper.findcustomer.FindCustomerModel;
 import com.example.shopkeeper.orderhistory.request.OrderHistoryRequestBody;
 import com.example.shopkeeper.orderhistory.request.OrderHistoryRequestEnvelope;
 import com.example.shopkeeper.orderhistory.response.OrderHistoryResponseEnvelope;
+import com.example.shopkeeper.sendinvoice.SendInvoiceActivity;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import easyadapter.dc.com.library.EasyAdapter;
 import retrofit2.Call;
@@ -35,6 +40,9 @@ public class OrderHistoryFragment extends Fragment {
     private RecyclerView recyclerview;
     private SearchView orderHistorySearch;
     private OrderHistoryAdapter mAdapter;
+    private OrderHistoryModel selectOrderDetail;
+    private ArrayList<CreateOrderModel> items;
+    private FindCustomerModel customerModel;
 
     public OrderHistoryFragment() {
         // Required empty public constructor
@@ -45,6 +53,13 @@ public class OrderHistoryFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        items = (ArrayList<CreateOrderModel>) getArguments().getSerializable("items");
+        customerModel = (FindCustomerModel) getArguments().getSerializable("customer");
 
     }
 
@@ -61,6 +76,9 @@ public class OrderHistoryFragment extends Fragment {
         recyclerview.setLayoutManager(mLayoutManager);
         recyclerview.setItemAnimator(new DefaultItemAnimator());
         demo = orderHistorySearch.getQuery().toString();
+
+
+
         orderHistorySearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -79,7 +97,19 @@ public class OrderHistoryFragment extends Fragment {
         mAdapter.setRecyclerViewItemClick(new EasyAdapter.OnRecyclerViewItemClick<OrderHistoryModel>() {
             @Override
             public void onRecyclerViewItemClick(View view, OrderHistoryModel model) {
-                Toast.makeText(getActivity(), "Hello", Toast.LENGTH_SHORT).show();
+                OrderHistoryFragment fragment = new OrderHistoryFragment();
+                selectOrderDetail = model;
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("model", selectOrderDetail);
+                fragment.setArguments(bundle);
+                Intent i = new Intent(getActivity(), SendInvoiceActivity.class);
+                i.putExtra("customer",customerModel);
+                i.putExtra("items",items);
+                i.putExtra("model",selectOrderDetail);
+                startActivity(i);
+                ((Activity) getActivity()).overridePendingTransition(0, 0);
+                Objects.requireNonNull(getActivity()).onBackPressed();
+
             }
         });
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

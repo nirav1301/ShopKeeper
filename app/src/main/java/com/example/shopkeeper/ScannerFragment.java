@@ -1,6 +1,8 @@
 package com.example.shopkeeper;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,10 +25,10 @@ import com.dc.codescanner.controls.ScannerResult;
 import com.example.shopkeeper.authentication.login.RetrofitGenerator;
 import com.example.shopkeeper.createorder.CreateOrderModel;
 import com.example.shopkeeper.createorder.CreateOrderResponse;
+import com.example.shopkeeper.createorder.XAddProductAdapter;
 import com.example.shopkeeper.createorder.request.CreateOrderRequestBody;
 import com.example.shopkeeper.createorder.request.CreateOrderRequestEnvelope;
 import com.example.shopkeeper.createorder.response.CreateOrderResponseEnvelope;
-import com.example.shopkeeper.createorder.XAddProductAdapter;
 import com.example.shopkeeper.databinding.FragmentScannerFragmentBinding;
 import com.example.shopkeeper.findcustomer.ShippingActivity;
 import com.example.shopkeeper.recentorder.RecentOrderFragment;
@@ -78,26 +80,28 @@ public class ScannerFragment extends Fragment {
         binding.imgbtnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (mAdapter.getItemCount() <= 0){
-//                    AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-//                    builder1.setTitle("Warning");
-//                    builder1.setMessage("Please add any item");
-//                    builder1.setCancelable(true);
-//                    builder1.setNeutralButton(android.R.string.ok,
-//                            new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialog, int id) {
-//                                    dialog.cancel();
-//                                }
-//                            });
-//
-//                    AlertDialog alert11 = builder1.create();
-//                    alert11.show();
-//                }
+                if (mAdapter.getItemCount() <= 0){
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+                    builder1.setTitle("Warning");
+                    builder1.setMessage("Please add any item");
+                    builder1.setCancelable(true);
+                    builder1.setNeutralButton(android.R.string.ok,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }
+                else {
 
                     Intent i = new Intent(getActivity(), ShippingActivity.class);
                     i.putExtra("items", mAdapter.getData());
                     startActivity(i);
                     ((Activity) getActivity()).overridePendingTransition(0, 0);
+                }
 
             }
         });

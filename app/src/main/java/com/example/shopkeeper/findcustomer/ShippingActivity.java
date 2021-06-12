@@ -114,29 +114,6 @@ public class ShippingActivity extends AppCompatActivity {
         });
 
 
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-//                switch (item.getItemId()) {
-//                    case R.id.home:
-//                        Intent intent = new Intent(Shipping.this,
-//                                HomeScreenActivity.class);
-//                        startActivity(intent);
-//                        break;
-//                    case R.id.scan:
-//                        Intent intent1 = new Intent(Shipping.this,
-//                                Scanner.class);
-//                        startActivity(intent1);
-//                        break;
-//                    case R.id.order:
-//                        Intent intent2 = new Intent(Shipping.this
-//                                , OrderHistory.class);
-//                        startActivity(intent2);
-//                        break;
-//                }
-//                return false;
-//            }
-//        });
         btngotoPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

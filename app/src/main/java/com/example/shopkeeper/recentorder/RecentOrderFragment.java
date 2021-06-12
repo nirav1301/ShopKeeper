@@ -10,17 +10,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.shopkeeper.R;
-import com.example.shopkeeper.authentication.login.RetrofitGenerator;
 import com.example.shopkeeper.authentication.MainActivity;
+import com.example.shopkeeper.authentication.login.RetrofitGenerator;
+import com.example.shopkeeper.createorder.CreateOrderModel;
+import com.example.shopkeeper.findcustomer.FindCustomerModel;
+import com.example.shopkeeper.orderhistory.OrderHistoryFragment;
 import com.example.shopkeeper.recentorder.request.RecentOrderRequestBody;
 import com.example.shopkeeper.recentorder.request.RecentOrderRequestEnvelope;
 import com.example.shopkeeper.recentorder.response.RecentOrderModel;
@@ -28,6 +32,7 @@ import com.example.shopkeeper.recentorder.response.RecentOrderResponse;
 import com.example.shopkeeper.recentorder.response.RecentOrderResponseEnvelope;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import easyadapter.dc.com.library.EasyAdapter;
@@ -43,6 +48,9 @@ public class RecentOrderFragment extends Fragment {
     private TextView viewOrders;
     private ImageButton imageButtonLogout;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ArrayList<CreateOrderModel> items;
+    private FindCustomerModel customerModel;
+    private RecentOrderModel recentOrderModel;
 
     public RecentOrderFragment() {
     }
@@ -62,9 +70,22 @@ public class RecentOrderFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.orderrec);
         viewOrders = (TextView) view.findViewById(R.id.viewAllOrder);
         swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swiperefrecentorder);
+//
+
         viewOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                OrderHistoryFragment fragment = new OrderHistoryFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, fragment);
+                fragmentTransaction.addToBackStack(null);
+                Bundle b = new Bundle();
+                b.putSerializable("items",items);
+                b.putSerializable("customer",customerModel);
+                fragment.setArguments(b);
+                fragmentTransaction.commit();
+
             }
         });
         imageButtonLogout = (ImageButton) view.findViewById(R.id.imageButton);
@@ -86,7 +107,8 @@ public class RecentOrderFragment extends Fragment {
         mAdapter.setRecyclerViewItemClick(new EasyAdapter.OnRecyclerViewItemClick<RecentOrderModel>() {
             @Override
             public void onRecyclerViewItemClick(View view, RecentOrderModel model) {
-                Toast.makeText(getActivity(), "Hello", Toast.LENGTH_SHORT).show();
+
+
             }
         });
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

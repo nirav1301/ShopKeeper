@@ -1,6 +1,7 @@
 package com.example.shopkeeper.sendorder;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -17,7 +18,7 @@ import com.example.shopkeeper.authentication.login.RetrofitGenerator;
 import com.example.shopkeeper.createorder.CreateOrderModel;
 import com.example.shopkeeper.databinding.ActivityPlaceOrderBinding;
 import com.example.shopkeeper.findcustomer.FindCustomerModel;
-import com.example.shopkeeper.orderhistory.OrderHistoryFragment;
+import com.example.shopkeeper.homescreen.HomeActivity;
 import com.example.shopkeeper.sendorder.request.SendOrderRequestBody;
 import com.example.shopkeeper.sendorder.request.SendOrderRequestEnvelope;
 import com.example.shopkeeper.sendorder.response.SendOrderResponseEnvelope;
@@ -59,7 +60,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
         binding.btnplaceorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendOrder();
+               sendOrder();
 
             }
         });
@@ -114,12 +115,12 @@ public class PlaceOrderActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
 //                                    Intent i = new Intent(PlaceOrderActivity.this, SendInvoiceActivity.class);
 //                                    startActivity(i);
-                                    OrderHistoryFragment fragment = new OrderHistoryFragment();
-                                    getSupportFragmentManager()
-                                            .beginTransaction()
-                                            .replace(R.id.fragment_container, fragment)
-                                            .commit();
-                                    dialog.dismiss();
+                                    Intent i = new Intent(PlaceOrderActivity.this, HomeActivity.class);
+                                    i.putExtra("items",items);
+                                    i.putExtra("customer",customerModel);
+                                    startActivity(i);
+                                    finish();
+
                                 }
                             });
                     alertDialog.show();
@@ -143,4 +144,5 @@ public class PlaceOrderActivity extends AppCompatActivity {
         mAdapter.addAll(items, false);
         mAdapter.notifyDataSetChanged();
     }
+
 }

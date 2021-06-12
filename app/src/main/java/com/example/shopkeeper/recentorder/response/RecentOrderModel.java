@@ -2,7 +2,9 @@ package com.example.shopkeeper.recentorder.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RecentOrderModel {
+import java.io.Serializable;
+
+public class RecentOrderModel implements Serializable {
 
     @SerializedName("CompanyCustomerID")
     @Expose

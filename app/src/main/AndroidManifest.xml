@@ -13,7 +13,7 @@
         android:theme="@style/Theme.ShopKeeper">
         <activity android:name=".sendinvoice.SendInvoiceActivity"
             android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".homescreen.Home"
+        <activity android:name=".homescreen.HomeActivity"
             android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".forgotpassword.ForgotPasswordActivity"
             android:windowSoftInputMode="adjustResize"/>
