@@ -13,7 +13,7 @@ import com.example.shopkeeper.orderhistory.OrderHistoryFragment;
 import com.example.shopkeeper.recentorder.RecentOrderFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Home extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
+public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,6 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         loadFragment(new RecentOrderFragment());
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
-
     }
     public boolean loadFragment(Fragment fragment) {
         //switching fragment

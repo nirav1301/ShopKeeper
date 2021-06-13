@@ -1,6 +1,5 @@
 package com.example.shopkeeper.forgotpassword;
 
-import com.example.shopkeeper.authentication.login.response.Setting;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -12,7 +11,7 @@ public class ForgotPasswordResponse {
     private Setting setting;
     @SerializedName("data")
     @Expose
-    private List<Object> data = null;
+    private List<ForgotPasswordModel> data ;
     @SerializedName("totalCount")
     @Expose
     private int totalCount;
@@ -25,11 +24,11 @@ public class ForgotPasswordResponse {
         this.setting = setting;
     }
 
-    public List<Object> getData() {
+    public List<ForgotPasswordModel> getData() {
         return data;
     }
 
-    public void setData(List<Object> data) {
+    public void setData(List<ForgotPasswordModel> data) {
         this.data = data;
     }
 

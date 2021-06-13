@@ -12,8 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.shopkeeper.R;
-import com.example.shopkeeper.authentication.login.RetrofitGenerator;
 import com.example.shopkeeper.authentication.MainActivity;
+import com.example.shopkeeper.authentication.login.RetrofitGenerator;
 import com.example.shopkeeper.forgotpassword.request.ForgotPassEmailRequestBody;
 import com.example.shopkeeper.forgotpassword.request.ForgotPassRequestEnvelope;
 import com.example.shopkeeper.forgotpassword.response.ForgotPasswordResponseEnvelope;
@@ -64,7 +64,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         call.enqueue(new Callback<ForgotPasswordResponseEnvelope>() {
             @Override
             public void onResponse(Call<ForgotPasswordResponseEnvelope> call, Response<ForgotPasswordResponseEnvelope> response) {
-                Toast.makeText(ForgotPasswordActivity.this, "Email has been sent", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ForgotPasswordActivity.this, "Email has been Sent", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(ForgotPasswordActivity.this, MainActivity.class);
                 startActivity(i);
                 finish();

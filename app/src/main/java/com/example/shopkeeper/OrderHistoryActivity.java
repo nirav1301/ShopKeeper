@@ -1,24 +1,25 @@
-package com.example.shopkeeper.orderhistory;
+package com.example.shopkeeper;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.shopkeeper.R;
 import com.example.shopkeeper.authentication.login.RetrofitGenerator;
+import com.example.shopkeeper.orderhistory.OrderHistoryModel;
+import com.example.shopkeeper.orderhistory.OrderHistoryResponse;
 import com.example.shopkeeper.orderhistory.request.OrderHistoryRequestBody;
 import com.example.shopkeeper.orderhistory.request.OrderHistoryRequestEnvelope;
 import com.example.shopkeeper.orderhistory.response.OrderHistoryResponseEnvelope;
+import com.example.shopkeeper.sendinvoice.SendInvoiceActivity;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -28,46 +29,25 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrderHistoryFragment extends Fragment {
-    private String demo;
+public class OrderHistoryActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerview;
     private SearchView orderHistorySearch;
-    private OrderHistoryAdapter mAdapter;
-
-    public OrderHistoryFragment() {
-        // Required empty public constructor
-    }
-
+    private XOrderHistoryAdapter mAdapter;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_order_history_fragment, container, false);
-        recyclerview = (RecyclerView) view.findViewById(R.id.orderhisrecview);
-        orderHistorySearch = view.findViewById(R.id.searchorderhistory);
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipereforderhistory);
-        mAdapter = new OrderHistoryAdapter();
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        setContentView(R.layout.activity_order_history);
+        recyclerview = (RecyclerView) findViewById(R.id.orderhisrecview);
+        orderHistorySearch = findViewById(R.id.searchorderhistory);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipereforderhistory);
+        mAdapter = new XOrderHistoryAdapter();
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerview.setLayoutManager(mLayoutManager);
         recyclerview.setItemAnimator(new DefaultItemAnimator());
-        demo = orderHistorySearch.getQuery().toString();
-
-
-
+//        items = (ArrayList<CreateOrderModel>) getIntent().getSerializableExtra("items");
+//        customerModel = (FindCustomerModel) getIntent().getSerializableExtra("customer");
         orderHistorySearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -86,6 +66,13 @@ public class OrderHistoryFragment extends Fragment {
         mAdapter.setRecyclerViewItemClick(new EasyAdapter.OnRecyclerViewItemClick<OrderHistoryModel>() {
             @Override
             public void onRecyclerViewItemClick(View view, OrderHistoryModel model) {
+                Intent i = new Intent(OrderHistoryActivity.this, SendInvoiceActivity.class);
+//                i.putExtra("items",items);
+//                i.putExtra("customer",customerModel);
+//                i.putExtra("selectorder",model);
+                startActivity(i);
+                finish();
+
 
             }
         });
@@ -97,7 +84,6 @@ public class OrderHistoryFragment extends Fragment {
         });
 
         // prepareMovieData();
-        return view;
 
 
     }
@@ -125,18 +111,19 @@ public class OrderHistoryFragment extends Fragment {
                 mAdapter.notifyDataSetChanged();
             }
         });
+
     }
 
-    public void getOrderHistory() {
+    private void getOrderHistory() {
         OrderHistoryRequestEnvelope requestEnvelope = new OrderHistoryRequestEnvelope();
         OrderHistoryRequestBody requestBody = new OrderHistoryRequestBody();
         OrderHistoryRequestBody.RequestOrderHistory requestModel = new OrderHistoryRequestBody.RequestOrderHistory();
         requestModel.companyId = "10015";
         requestModel.pageNum = "1";
-        requestModel.recordPerPage = "10";
+        requestModel.recordPerPage = "30";
         requestModel.orderId = "64188";
         requestModel.userId = "756";
-        requestModel.searchtext = demo;
+        requestModel.searchtext = String.valueOf(orderHistorySearch.getQuery());
         requestModel.xmlns = "http://tempuri.org/";
         requestBody.requestOrderHistory = requestModel;
         requestEnvelope.body = requestBody;

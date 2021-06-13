@@ -4,7 +4,9 @@ package com.example.shopkeeper.orderhistory;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class OrderHistoryModel {
+import java.io.Serializable;
+
+public class OrderHistoryModel implements Serializable {
 
     @SerializedName("CompanyCustomerID")
     @Expose

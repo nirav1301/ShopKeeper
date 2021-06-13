@@ -15,7 +15,7 @@ import com.example.shopkeeper.authentication.login.request.LoginRequestEnvelope;
 import com.example.shopkeeper.authentication.login.response.LoginResponseEnvelope;
 import com.example.shopkeeper.authentication.login.response.UserLoginResponse;
 import com.example.shopkeeper.authentication.login.RetrofitGenerator;
-import com.example.shopkeeper.homescreen.Home;
+import com.example.shopkeeper.homescreen.HomeActivity;
 import com.example.shopkeeper.R;
 import com.example.shopkeeper.forgotpassword.ForgotPasswordActivity;
 import com.google.gson.Gson;
@@ -99,11 +99,15 @@ public class MainActivity extends AppCompatActivity {
                 if (userLoginResponse.getSetting().getSuccess() == true) {
                      stopAnim();
 //                    Toast.makeText(MainActivity.this,userLoginResponse.getData().get(0).getCompanyEmail(),Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(MainActivity.this, Home.class);
+                    Intent i = new Intent(MainActivity.this, HomeActivity.class);
                     startActivity(i);
                     Toast.makeText(MainActivity.this, "Welcome" + " " + userLoginResponse.getData().get(0).getFirstName(),
                             Toast.LENGTH_SHORT).show();
                     finish();
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Invalid Details", Toast.LENGTH_SHORT).show();
+                    stopAnim();
                 }
             }
 

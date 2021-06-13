@@ -1,6 +1,7 @@
 package com.example.shopkeeper.sendorder;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -12,12 +13,12 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.shopkeeper.OrderHistoryActivity;
 import com.example.shopkeeper.R;
 import com.example.shopkeeper.authentication.login.RetrofitGenerator;
 import com.example.shopkeeper.createorder.CreateOrderModel;
 import com.example.shopkeeper.databinding.ActivityPlaceOrderBinding;
 import com.example.shopkeeper.findcustomer.FindCustomerModel;
-import com.example.shopkeeper.orderhistory.OrderHistoryFragment;
 import com.example.shopkeeper.sendorder.request.SendOrderRequestBody;
 import com.example.shopkeeper.sendorder.request.SendOrderRequestEnvelope;
 import com.example.shopkeeper.sendorder.response.SendOrderResponseEnvelope;
@@ -35,6 +36,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
     private FindCustomerModel customerModel;
     private ActivityPlaceOrderBinding binding;
     private XSendOrderAdapter mAdapter;
+    private String value;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +46,14 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
         items = (ArrayList<CreateOrderModel>) getIntent().getSerializableExtra("items");
         customerModel = (FindCustomerModel) getIntent().getSerializableExtra("customer");
+        value = getIntent().getStringExtra("key");
 
         binding.pocompanyname.setText(customerModel.getCustomerCompanyName());
         binding.pocompanystreet.setText(customerModel.getShippingStreet());
         binding.pocomapnycity.setText(customerModel.getShippingCity());
         binding.pocompanystate.setText(customerModel.getShippingStateOrProvince());
         binding.pocompanyzipcode.setText(customerModel.getShippingZipcode());
+        binding.poordertotal.setText(value);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         binding.rvplaceorder.setLayoutManager(mLayoutManager);
         binding.rvplaceorder.setItemAnimator(new DefaultItemAnimator());
@@ -59,7 +63,8 @@ public class PlaceOrderActivity extends AppCompatActivity {
         binding.btnplaceorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendOrder();
+               sendOrder();
+
 
             }
         });
@@ -114,12 +119,12 @@ public class PlaceOrderActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
 //                                    Intent i = new Intent(PlaceOrderActivity.this, SendInvoiceActivity.class);
 //                                    startActivity(i);
-                                    OrderHistoryFragment fragment = new OrderHistoryFragment();
-                                    getSupportFragmentManager()
-                                            .beginTransaction()
-                                            .replace(R.id.fragment_container, fragment)
-                                            .commit();
-                                    dialog.dismiss();
+                                    Intent i = new Intent(PlaceOrderActivity.this, OrderHistoryActivity.class);
+                                    i.putExtra("items",items);
+                                    i.putExtra("customer",customerModel);
+                                    startActivity(i);
+                                    finish();
+
                                 }
                             });
                     alertDialog.show();
@@ -143,4 +148,5 @@ public class PlaceOrderActivity extends AppCompatActivity {
         mAdapter.addAll(items, false);
         mAdapter.notifyDataSetChanged();
     }
+
 }

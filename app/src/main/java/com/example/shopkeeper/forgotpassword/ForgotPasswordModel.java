@@ -1,9 +1,9 @@
-package com.example.shopkeeper.sendinvoice;
+package com.example.shopkeeper.forgotpassword;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SendInvoiceModel {
+public class ForgotPasswordModel {
     @SerializedName("result")
     @Expose
     private String result;
