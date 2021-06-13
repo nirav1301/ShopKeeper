@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.shopkeeper.authentication.login.RetrofitGenerator;
+import com.example.shopkeeper.createorder.CreateOrderModel;
+import com.example.shopkeeper.findcustomer.FindCustomerModel;
 import com.example.shopkeeper.orderhistory.OrderHistoryModel;
 import com.example.shopkeeper.orderhistory.OrderHistoryResponse;
 import com.example.shopkeeper.orderhistory.request.OrderHistoryRequestBody;
@@ -35,6 +37,9 @@ public class OrderHistoryActivity extends AppCompatActivity {
     private SearchView orderHistorySearch;
     private XOrderHistoryAdapter mAdapter;
 
+    private FindCustomerModel customerModel;
+    private ArrayList<CreateOrderModel> items;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +51,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerview.setLayoutManager(mLayoutManager);
         recyclerview.setItemAnimator(new DefaultItemAnimator());
-//        items = (ArrayList<CreateOrderModel>) getIntent().getSerializableExtra("items");
-//        customerModel = (FindCustomerModel) getIntent().getSerializableExtra("customer");
+        items = (ArrayList<CreateOrderModel>) getIntent().getSerializableExtra("items");
+        customerModel = (FindCustomerModel) getIntent().getSerializableExtra("customer");
         orderHistorySearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -67,6 +72,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
             @Override
             public void onRecyclerViewItemClick(View view, OrderHistoryModel model) {
                 Intent i = new Intent(OrderHistoryActivity.this, SendInvoiceActivity.class);
+                i.putExtra("model", model);
 //                i.putExtra("items",items);
 //                i.putExtra("customer",customerModel);
 //                i.putExtra("selectorder",model);
@@ -104,8 +110,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFilterResult(ArrayList<OrderHistoryModel> filteredList)
-            {
+            public void onFilterResult(ArrayList<OrderHistoryModel> filteredList) {
                 mAdapter.clear(false);
                 mAdapter.addAll(filteredList, false);
                 mAdapter.notifyDataSetChanged();

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.shopkeeper.R;
 import com.example.shopkeeper.authentication.login.RetrofitGenerator;
 import com.example.shopkeeper.createorder.CreateOrderModel;
-import com.example.shopkeeper.findcustomer.FindCustomerModel;
 import com.example.shopkeeper.homescreen.HomeActivity;
 import com.example.shopkeeper.orderhistory.OrderHistoryModel;
 import com.example.shopkeeper.sendinvoice.request.SendInvoiceRequestBody;
@@ -29,12 +28,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SendInvoiceActivity extends AppCompatActivity {
+
     private Button btnsendInvoice;
     private TextView odorderid;
     private TextView odordertime;
     private TextView odorderstatus;
     private TextView odcompanyname;
-    private TextView odcompanystreet ;
+    private TextView odcompanystreet;
     private TextView odcompanycity;
     private TextView odcompanystate;
     private TextView odcompanyzicode;
@@ -45,13 +45,14 @@ public class SendInvoiceActivity extends AppCompatActivity {
     private RecyclerView rvorderdetail;
     private XSendInvoiceAdapter mAdapter;
     private ArrayList<CreateOrderModel> items;
-    private FindCustomerModel customerModel;
     private OrderHistoryModel selectOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_details_);
+        
+        selectOrder = (OrderHistoryModel) getIntent().getSerializableExtra("model");
         btnsendInvoice = findViewById(R.id.btnsendinvoice);
         odorderid = findViewById(R.id.odorderid);
         odordertime = findViewById(R.id.odordertime);
@@ -90,12 +91,19 @@ public class SendInvoiceActivity extends AppCompatActivity {
         btnsendInvoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             // sendInvoice();
-                Intent i = new Intent(SendInvoiceActivity.this,HomeActivity.class);
+                sendInvoice();
+                /*Intent i = new Intent(SendInvoiceActivity.this,HomeActivity.class);
                 startActivity(i);
-                finish();
+                finish();*/
             }
         });
+
+        odordertotal.setText(String.valueOf(selectOrder.getTotalOrderAmount()));
+        odorderid.setText(String.valueOf(selectOrder.getInventoryOrderID()));
+        odordertime.setText(String.valueOf(selectOrder.getDateTimeOrder()));
+        odorderstatus.setText(String.valueOf(selectOrder.getOrderStatus()));
+
+        odcompanyname.setText(selectOrder.getCompanyName());
     }
 
     private void loadProductDetail() {
@@ -104,21 +112,21 @@ public class SendInvoiceActivity extends AppCompatActivity {
         mAdapter.notifyDataSetChanged();
     }
 
-    public void sendInvoice(){
+    public void sendInvoice() {
         SendInvoiceRequestEnvelope requestEnvelope = new SendInvoiceRequestEnvelope();
         SendInvoiceRequestBody requestBody = new SendInvoiceRequestBody();
         SendInvoiceRequestBody.RequestSendInvoice requestModel = new SendInvoiceRequestBody.RequestSendInvoice();
         requestModel.adminId = "756";
-        requestModel.companyId= "10015";
+        requestModel.companyId = "10015";
         requestModel.inventoryOrderId = String.valueOf(selectOrder.getInventoryOrderID());
-        requestModel.productStyle="2";
-        requestModel.email = customerModel.getLoginID();
-        requestModel.comment =etordercomment.getText().toString();
-        requestModel.companyWebsite ="";
+        requestModel.productStyle = "2";
+        requestModel.email = etorderemail.getText().toString();
+        requestModel.comment = etordercomment.getText().toString();
+        requestModel.companyWebsite = "";
         requestModel.xmlns = "http://tempuri.org/";
-        requestBody.requestSendInvoice= requestModel;
+        requestBody.requestSendInvoice = requestModel;
         requestEnvelope.body = requestBody;
-        Call<SendInvoiceResponseEnvelope> call =  RetrofitGenerator.getApiService().sendinvoiceX(requestEnvelope);
+        Call<SendInvoiceResponseEnvelope> call = RetrofitGenerator.getApiService().sendinvoiceX(requestEnvelope);
         call.enqueue(new Callback<SendInvoiceResponseEnvelope>() {
             @Override
             public void onResponse(Call<SendInvoiceResponseEnvelope> call, Response<SendInvoiceResponseEnvelope> response) {
@@ -131,8 +139,7 @@ public class SendInvoiceActivity extends AppCompatActivity {
                     startActivity(i);
                     finish();
 
-                }
-                else{
+                } else {
                     Toast.makeText(SendInvoiceActivity.this, "Falied to sent Invoice", Toast.LENGTH_SHORT).show();
                 }
 

@@ -45,6 +45,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
         mAdapter = new XSendOrderAdapter();
 
         items = (ArrayList<CreateOrderModel>) getIntent().getSerializableExtra("items");
+
         customerModel = (FindCustomerModel) getIntent().getSerializableExtra("customer");
         value = getIntent().getStringExtra("key");
 

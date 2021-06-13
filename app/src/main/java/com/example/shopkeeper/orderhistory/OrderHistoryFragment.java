@@ -1,5 +1,6 @@
 package com.example.shopkeeper.orderhistory;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.shopkeeper.OrderHistoryActivity;
 import com.example.shopkeeper.R;
 import com.example.shopkeeper.authentication.login.RetrofitGenerator;
 import com.example.shopkeeper.orderhistory.request.OrderHistoryRequestBody;
 import com.example.shopkeeper.orderhistory.request.OrderHistoryRequestEnvelope;
 import com.example.shopkeeper.orderhistory.response.OrderHistoryResponseEnvelope;
+import com.example.shopkeeper.sendinvoice.SendInvoiceActivity;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -86,7 +89,9 @@ public class OrderHistoryFragment extends Fragment {
         mAdapter.setRecyclerViewItemClick(new EasyAdapter.OnRecyclerViewItemClick<OrderHistoryModel>() {
             @Override
             public void onRecyclerViewItemClick(View view, OrderHistoryModel model) {
-
+                Intent i = new Intent(requireContext(), SendInvoiceActivity.class);
+                i.putExtra("model", model);
+                startActivity(i);
             }
         });
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

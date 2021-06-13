@@ -40,7 +40,7 @@ import retrofit2.Response;
 
 public class RecentOrderFragment extends Fragment {
     private RecyclerView recyclerView;
-   // private MovieAdapter mAdapter;
+    // private MovieAdapter mAdapter;
     private XRecentOrderAdapter mAdapter;
     private TextView viewOrders;
     private ImageButton imageButtonLogout;
@@ -63,7 +63,7 @@ public class RecentOrderFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_fragment, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.orderrec);
         viewOrders = (TextView) view.findViewById(R.id.viewAllOrder);
-        swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swiperefrecentorder);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiperefrecentorder);
 //
 
         viewOrders.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +83,7 @@ public class RecentOrderFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                    alertDialog();
+                alertDialog();
             }
 
         });
@@ -98,7 +98,6 @@ public class RecentOrderFragment extends Fragment {
             @Override
             public void onRecyclerViewItemClick(View view, RecentOrderModel model) {
 
-
             }
         });
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -110,7 +109,7 @@ public class RecentOrderFragment extends Fragment {
         });
 
 
-       // prepareMovieData();
+        // prepareMovieData();
         return view;
 
     }
@@ -129,7 +128,7 @@ public class RecentOrderFragment extends Fragment {
         call.enqueue(new Callback<RecentOrderResponseEnvelope>() {
             @Override
             public void onResponse(Call<RecentOrderResponseEnvelope> call, Response<RecentOrderResponseEnvelope> response) {
-               swipeRefreshLayout.setRefreshing(false);
+                swipeRefreshLayout.setRefreshing(false);
                 Gson gson = new Gson();
                 RecentOrderResponse recentOrderResponse = gson.fromJson(response.body().body.
                         recentOrderResponseModel.GetRecentOrdersResult, RecentOrderResponse.class);
@@ -146,8 +145,9 @@ public class RecentOrderFragment extends Fragment {
             }
         });
     }
+
     private void alertDialog() {
-        AlertDialog.Builder dialog=new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
         dialog.setMessage("Please Select any option");
         dialog.setTitle("Are you want to logout? ");
         dialog.setPositiveButton("YES",
@@ -160,13 +160,13 @@ public class RecentOrderFragment extends Fragment {
                         Objects.requireNonNull(getActivity()).onBackPressed();
                     }
                 });
-        dialog.setNegativeButton("cancel",new DialogInterface.OnClickListener() {
+        dialog.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
             }
         });
-        AlertDialog alertDialog=dialog.create();
+        AlertDialog alertDialog = dialog.create();
         alertDialog.show();
     }
 
