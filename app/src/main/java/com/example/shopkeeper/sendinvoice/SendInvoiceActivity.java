@@ -9,8 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shopkeeper.R;
@@ -68,26 +66,26 @@ public class SendInvoiceActivity extends AppCompatActivity {
         etorderemail = findViewById(R.id.etodemail);
         etordercomment = findViewById(R.id.odordercomment);
         rvorderdetail = findViewById(R.id.rvorderdetail);
-        odorderid.setText(selectOrder.getInventoryOrderID());
-        odordertime.setText(selectOrder.getOrderDateTime());
-        odorderstatus.setText(selectOrder.getOrderStatus());
-        odcompanyname.setText(customerModel.getCustomerCompanyName());
-        odcompanystreet.setText(customerModel.getShippingStreet());
-        odcompanycity.setText(customerModel.getShippingCity());
-        odcompanystate.setText(customerModel.getShippingStateOrProvince());
-        odcompanyzicode.setText(customerModel.getShippingZipcode());
-        odorderstyle.setText(String.valueOf(mAdapter.getItemCount()));
-        odordertotal.setText(String.valueOf(selectOrder.getTotalOrderAmount()));
-        etorderemail.setText(customerModel.getLoginID());
+//        odorderid.setText(selectOrder.getInventoryOrderID());
+//        odordertime.setText(selectOrder.getOrderDateTime());
+//        odorderstatus.setText(selectOrder.getOrderStatus());
+//        odcompanyname.setText(customerModel.getCustomerCompanyName());
+//        odcompanystreet.setText(customerModel.getShippingStreet());
+//        odcompanycity.setText(customerModel.getShippingCity());
+//        odcompanystate.setText(customerModel.getShippingStateOrProvince());
+//        odcompanyzicode.setText(customerModel.getShippingZipcode());
+//        odorderstyle.setText(String.valueOf(mAdapter.getItemCount()));
+//        odordertotal.setText(String.valueOf(selectOrder.getTotalOrderAmount()));
+//        etorderemail.setText(customerModel.getLoginID());
 
-        items = (ArrayList<CreateOrderModel>) getIntent().getSerializableExtra("items");
-        customerModel = (FindCustomerModel) getIntent().getSerializableExtra("customer");
-        selectOrder = (OrderHistoryModel) getIntent().getSerializableExtra("selectorder");
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        rvorderdetail.setLayoutManager(mLayoutManager);
-        rvorderdetail.setItemAnimator(new DefaultItemAnimator());
-        rvorderdetail.setAdapter(mAdapter);
-        loadProductDetail();
+//        items = (ArrayList<CreateOrderModel>) getIntent().getSerializableExtra("items");
+//        customerModel = (FindCustomerModel) getIntent().getSerializableExtra("customer");
+//        selectOrder = (OrderHistoryModel) getIntent().getSerializableExtra("selectorder");
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+//        rvorderdetail.setLayoutManager(mLayoutManager);
+//        rvorderdetail.setItemAnimator(new DefaultItemAnimator());
+//        rvorderdetail.setAdapter(mAdapter);
+//        loadProductDetail();
 
         btnsendInvoice.setOnClickListener(new View.OnClickListener() {
             @Override

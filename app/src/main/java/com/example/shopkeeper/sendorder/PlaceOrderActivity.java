@@ -36,6 +36,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
     private FindCustomerModel customerModel;
     private ActivityPlaceOrderBinding binding;
     private XSendOrderAdapter mAdapter;
+    private String value;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +46,14 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
         items = (ArrayList<CreateOrderModel>) getIntent().getSerializableExtra("items");
         customerModel = (FindCustomerModel) getIntent().getSerializableExtra("customer");
+        value = getIntent().getStringExtra("key");
 
         binding.pocompanyname.setText(customerModel.getCustomerCompanyName());
         binding.pocompanystreet.setText(customerModel.getShippingStreet());
         binding.pocomapnycity.setText(customerModel.getShippingCity());
         binding.pocompanystate.setText(customerModel.getShippingStateOrProvince());
         binding.pocompanyzipcode.setText(customerModel.getShippingZipcode());
+        binding.poordertotal.setText(value);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         binding.rvplaceorder.setLayoutManager(mLayoutManager);
         binding.rvplaceorder.setItemAnimator(new DefaultItemAnimator());
@@ -60,11 +63,8 @@ public class PlaceOrderActivity extends AppCompatActivity {
         binding.btnplaceorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//               sendOrder();
-                Intent i = new Intent(PlaceOrderActivity.this, OrderHistoryActivity.class);
-                i.putExtra("items",items);
-                i.putExtra("customer",customerModel);
-                startActivity(i);
+               sendOrder();
+
 
             }
         });

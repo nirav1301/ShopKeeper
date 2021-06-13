@@ -105,6 +105,10 @@ public class MainActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                     finish();
                 }
+                else {
+                    Toast.makeText(MainActivity.this, "Invalid Details", Toast.LENGTH_SHORT).show();
+                    stopAnim();
+                }
             }
 
             @Override

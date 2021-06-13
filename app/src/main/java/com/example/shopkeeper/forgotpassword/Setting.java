@@ -1,4 +1,4 @@
-package com.example.shopkeeper.authentication.login.response;
+package com.example.shopkeeper.forgotpassword;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -11,7 +11,7 @@ public class Setting {
     @Expose
     private String message;
 
-    public boolean getSuccess() {
+    public boolean isSuccess() {
         return success;
     }
 
@@ -26,6 +26,4 @@ public class Setting {
     public void setMessage(String message) {
         this.message = message;
     }
-
 }
-

@@ -60,6 +60,7 @@ public class ScannerFragment extends Fragment {
                     case R.id.imgbtndelete:
                         mAdapter.remove(model);
                         binding.coproductstyle.setText(String.valueOf(mAdapter.getItemCount()));
+                        binding.coproductfinaltotal.setText(String.valueOf(0));
                         break;
                 }
             }
@@ -80,6 +81,7 @@ public class ScannerFragment extends Fragment {
         binding.imgbtnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String value = binding.coproductfinaltotal.getText().toString();
                 if (mAdapter.getItemCount() <= 0){
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
                     builder1.setTitle("Warning");
@@ -99,6 +101,7 @@ public class ScannerFragment extends Fragment {
 
                     Intent i = new Intent(getActivity(), ShippingActivity.class);
                     i.putExtra("items", mAdapter.getData());
+                    i.putExtra("key",value);
                     startActivity(i);
                     ((Activity) getActivity()).overridePendingTransition(0, 0);
                 }
@@ -173,6 +176,7 @@ public class ScannerFragment extends Fragment {
                     /*mAdapter.clear(false);*/
                     mAdapter.addAll(createOrderResponse.getData(), false);
                     binding.coproductstyle.setText(String.valueOf(mAdapter.getItemCount()));
+                    sumOfProductTotal();
                     mAdapter.notifyDataSetChanged();
 
 
@@ -190,5 +194,16 @@ public class ScannerFragment extends Fragment {
             }
         });
     }
+        private void sumOfProductTotal(){
+
+            int totalPrice = 0;
+            int unitPrice  = 0;
+            for (int i = 0; i< mAdapter.getItemCount(); i++)
+            {
+                unitPrice += mAdapter.getData().get(0).getUnitPrice();
+                totalPrice = unitPrice * 5;
+            }
+            binding.coproductfinaltotal.setText(String.valueOf(totalPrice));
+        }
 
 }

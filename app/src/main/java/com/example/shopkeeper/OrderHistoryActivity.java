@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.shopkeeper.authentication.login.RetrofitGenerator;
-import com.example.shopkeeper.createorder.CreateOrderModel;
-import com.example.shopkeeper.findcustomer.FindCustomerModel;
 import com.example.shopkeeper.orderhistory.OrderHistoryModel;
 import com.example.shopkeeper.orderhistory.OrderHistoryResponse;
 import com.example.shopkeeper.orderhistory.request.OrderHistoryRequestBody;
@@ -35,9 +33,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerview;
     private SearchView orderHistorySearch;
-    private ArrayList<CreateOrderModel> items;
-    private FindCustomerModel customerModel;
-    private OrderHistoryModel selectOrder;
     private XOrderHistoryAdapter mAdapter;
 
     @Override
@@ -51,8 +46,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerview.setLayoutManager(mLayoutManager);
         recyclerview.setItemAnimator(new DefaultItemAnimator());
-        items = (ArrayList<CreateOrderModel>) getIntent().getSerializableExtra("items");
-        customerModel = (FindCustomerModel) getIntent().getSerializableExtra("customer");
+//        items = (ArrayList<CreateOrderModel>) getIntent().getSerializableExtra("items");
+//        customerModel = (FindCustomerModel) getIntent().getSerializableExtra("customer");
         orderHistorySearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -72,9 +67,9 @@ public class OrderHistoryActivity extends AppCompatActivity {
             @Override
             public void onRecyclerViewItemClick(View view, OrderHistoryModel model) {
                 Intent i = new Intent(OrderHistoryActivity.this, SendInvoiceActivity.class);
-                i.putExtra("items",items);
-                i.putExtra("customer",customerModel);
-                i.putExtra("selectorder",model);
+//                i.putExtra("items",items);
+//                i.putExtra("customer",customerModel);
+//                i.putExtra("selectorder",model);
                 startActivity(i);
                 finish();
 
@@ -125,7 +120,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
         OrderHistoryRequestBody.RequestOrderHistory requestModel = new OrderHistoryRequestBody.RequestOrderHistory();
         requestModel.companyId = "10015";
         requestModel.pageNum = "1";
-        requestModel.recordPerPage = "10";
+        requestModel.recordPerPage = "30";
         requestModel.orderId = "64188";
         requestModel.userId = "756";
         requestModel.searchtext = String.valueOf(orderHistorySearch.getQuery());

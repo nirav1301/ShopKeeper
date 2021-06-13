@@ -45,6 +45,7 @@ public class ShippingActivity extends AppCompatActivity {
 
     private FindCustomerModel selectCustomerModel;
     private ArrayList<CreateOrderModel> items;
+    public String value;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class ShippingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_shipping);
 
         items= (ArrayList<CreateOrderModel>) getIntent().getSerializableExtra("items");
+        value = getIntent().getStringExtra("key");
 
 
         addCustomer = findViewById(R.id.btnaddcustomer);
@@ -123,6 +125,7 @@ public class ShippingActivity extends AppCompatActivity {
                     Intent i = new Intent(ShippingActivity.this, PlaceOrderActivity.class);
                     i.putExtra("items",items);
                     i.putExtra("customer", selectCustomerModel);
+                    i.putExtra("key",value);
                     startActivity(i);
                 } else {
                     Toast.makeText(ShippingActivity.this, "Please select customer", Toast.LENGTH_SHORT).show();
